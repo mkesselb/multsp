@@ -11,31 +11,58 @@ class RegisterController extends Zend_Controller_Action
     {
         $request = $this->getRequest();
         $form    = new Application_Form_Register();
+        $duplicate = null;
         
         if ($this->getRequest()->isPost()){
-            if ($form->isValid($request->getPost())){ 
-                $user = new Application_Model_User($form->getValues());
-                //TODO: set user confirm code
-                $user->setConfirmationcode('abc');
+            if ($form->isValid($request->getPost())){
+                $u = new Application_Model_User(null);
                 $mapper = new Application_Model_UserMapper();
-                //TODO: first, check if user email exists
-                
-                $mapper->save($user);
-                
-                //TODO: send zend email
-                
-                
-                //redirect to index/index
-                return $this->_helper->redirector('index', 'index');
+                $mapper->findByField('email', $form->getValue('email'), $u);
+                if($u->getEmail() === $form->getValue('email')){
+                    $duplicate = 'registration with duplicate email not allowed';
+                } else{
+                    $user = new Application_Model_User($form->getValues());
+                    $user->setConfirmation_code(substr(base64_encode(sha1(mt_rand())), 0, 20));
+                    //TODO: hash+salt
+                    //$pw = password_hash($user->getPassword(), PASSWORD_DEFAULT);
+                    $pw = $user->getPassword();
+                    $user->setPassword($pw);
+                    $mapper->save($user);
+                    
+                    //TODO: mail configuration
+                    $mail = new Zend_Mail();
+                    $mail->setBodyText('registration url: '
+                        . $_SERVER["HTTP_HOST"]
+                        . $_SERVER["REQUEST_URI"]
+                        . '/confirm?confirmation_code=' . $user->getConfirmation_code())
+                        ->setFrom('noreply@multsp.at', 'noreply')
+                        ->addTo($user->getEmail(), $user->getEmail())
+                        ->setSubject('Registration to my-ultimate-spendings')
+                        ->send();
+                    
+                    //redirect to index/index
+                    return $this->_helper->redirector('index', 'index');
+                }
             }
         }
         
+        $this->view->duplicate = $duplicate;
         $this->view->form = $form;
     }
     
     public function confirmAction(){
-        //check confirm code of request
-        //if ok->purge confirm code in db, redirect to login, user can login now
+        $request = $this->getRequest();
+        $success = 'confirmation not successful';
         
+        if ($request->isGet()){
+            $confirmcode = $request->getParam('confirmation_code');
+            $user = new Application_Model_User();
+            $mapper = new Application_Model_UserMapper();
+            $mapper->findByField('confirmation_code', $confirmcode, $user);
+            $mapper->update($user->setConfirmation_code('1'));
+            $success = 'confirmation successful!';
+        }
+        
+        $this->view->success = $success;
     }
 }

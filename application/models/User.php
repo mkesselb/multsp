@@ -1,9 +1,10 @@
 <?php
 class Application_Model_User
 {
+    protected $id;
     protected $email;
     protected $password;
-    protected $confirmationcode;
+    protected $confirmation_code;
     
     public function __construct(array $options = null)
     {
@@ -60,12 +61,21 @@ class Application_Model_User
         return $this;
     }
     
-    public function getConfirmationcode(){
-        return $this->confirmationcode;
+    public function getConfirmation_code(){
+        return $this->confirmation_code;
     }
     
-    public function setConfirmationcode($confirmationcode){
-        $this->confirmationcode = $confirmationcode;
+    public function setConfirmation_code($confirmation_code){
+        $this->confirmation_code = $confirmation_code;
+        return $this;
+    }
+    
+    public function getId(){
+        return $this->id;
+    }
+    
+    public function setId($id){
+        $this->id = $id;
         return $this;
     }
 }

@@ -28,13 +28,13 @@ class Application_Model_UserMapper
         $data = array(
             'email'   => $user->getEmail(),
             'password' => $user->getPassword(),
-            'confirmation_code' => $user->getConfirmationcode(),
+            'confirmation_code' => $user->getConfirmation_code(),
         );
 
         $this->getDbTable()->insert($data);
     }
 
-    public function find($id, Application_Model_Guestbook $user)
+    public function find($id, Application_Model_User $user)
     {
         $result = $this->getDbTable()->find($id);
         if (0 == count($result)) {
@@ -44,10 +44,45 @@ class Application_Model_UserMapper
         $user->setId($row->id)
                   ->setEmail($row->email)
                   ->setPassword($row->password)
-                  ->setConfirmationcode($row->comfirmation_code);
+                  ->setConfirmation_code($row->confirmation_code);
     }
     
-    //find for email_address
-    //find on confirmation_code
-    //  -> 1 method with params
+    public function update(Application_Model_User $user){
+        $data = array(
+            'email'   => $user->getEmail(),
+            'password' => $user->getPassword(),
+            'confirmation_code' => $user->getConfirmation_code(),
+        );
+        $id = $user->getId();
+        $this->getDbTable()->update($data, array('id = ?' => $id));
+    }
+    
+    public function findUser($email, $password, Application_Model_User $user){
+        $row = $this->getDbTable()->fetchRow($this->getDbTable()->select()
+            ->where('email = :mail and password = :passw')
+            ->bind(array(':mail'=>$email, ':passw'=>$password)));
+        if($row === null){
+            return;
+        }
+        
+        $user->setId($row->id)
+            ->setEmail($row->email)
+            ->setPassword($row->password)
+            ->setConfirmation_code($row->confirmation_code);
+    }
+    
+    public function findByField($field, $value, Application_Model_User $user){
+        $row = $this->getDbTable()->fetchRow(
+            $this->getDbTable()->select()
+                ->where($field . ' = :value')
+                ->bind(array(':value'=>$value)));
+        if($row === null){
+            return;
+        }
+        
+        $user->setId($row->id)
+            ->setEmail($row->email)
+            ->setPassword($row->password)
+            ->setConfirmation_code($row->confirmation_code);
+    }
 }

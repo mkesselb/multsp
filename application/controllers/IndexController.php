@@ -11,18 +11,25 @@ class IndexController extends Zend_Controller_Action
     {
         $request = $this->getRequest();
         $form    = new Application_Form_Index();
+        $confirm = null;
         
         if ($this->getRequest()->isPost()){
             if ($form->isValid($request->getPost())){
-                //TODO: check if user is confirmed
-                /*$comment = new Application_Model_Guestbook($form->getValues());
-                 $mapper  = new Application_Model_GuestbookMapper();
-                 $mapper->save($comment);*/
-                
-                return $this->_helper->redirector('index', 'account');
+                $user = new Application_Model_User(null);
+                $mapper  = new Application_Model_UserMapper();
+                //TODO: hash+salt
+                //$pw = password_hash($form->getValue('password'), PASSWORD_DEFAULT);
+                $pw = $form->getValue('password');
+                $mapper->findUser($form->getValue('email'), $pw, $user);
+                if($user->getConfirmation_code() === '1'){
+                    return $this->_helper->redirector('index', 'account');
+                } else{
+                    $confirm = 'email is not yet confirmed!';
+                }
             }
         }
         
+        $this->view->confirm = $confirm;
         $this->view->form = $form;
     }
 }

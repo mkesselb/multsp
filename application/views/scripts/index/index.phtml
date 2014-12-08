@@ -5,6 +5,9 @@
 <?php
 $this->form->setAction($this->url());
 echo $this->form;
+if($this->confirm !== null){
+    echo $this->confirm . '<br>';
+}
 ?>
 
 <div id="register">

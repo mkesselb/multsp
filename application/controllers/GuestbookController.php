@@ -2,7 +2,6 @@
 
 class GuestbookController extends Zend_Controller_Action
 {
-
     public function init()
     {
         /* Initialize action controller here */
@@ -30,9 +29,4 @@ class GuestbookController extends Zend_Controller_Action
 
         $this->view->form = $form;
     }
-
-
 }
-
-
-

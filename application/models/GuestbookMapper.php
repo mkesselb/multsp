@@ -1,5 +1,4 @@
 <?php
-
 class Application_Model_GuestbookMapper
 {
     protected $_dbTable;
@@ -68,4 +67,3 @@ class Application_Model_GuestbookMapper
         return $entries;
     }
 }
-

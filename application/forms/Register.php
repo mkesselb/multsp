@@ -1,0 +1,49 @@
+<?php
+
+class Application_Form_Register extends Zend_Form
+{
+    public function init()
+    {
+        // Set the method for the display form to POST
+        $this->setMethod('post');
+
+        // Add an email element
+        $this->addElement('text', 'email', array(
+            'label'      => 'Email address:',
+            'required'   => true,
+            'filters'    => array('StringTrim'),
+            'validators' => array(
+                'EmailAddress',
+            )
+        ));
+
+        // Add the password element
+        $this->addElement('password', 'password', array(
+            'label'      => 'Password:',
+            'required'   => true,
+            'validators' => array(
+                array('validator' => 'StringLength', 'options' => array(8, 20))
+                )
+        ));
+        
+        $this->addElement('password', 'password2', array(
+            'label'      => 'Re-enter password:',
+            'required'   => true,
+            'validators' => array(
+                array('validator1' => 'StringLength', 'options' => array(8, 20)),
+                array('validator2' => 'identical', false, array('token' => 'password'))
+            )
+        ));
+
+        // Add the register button
+        $this->addElement('submit', 'register', array(
+            'ignore'   => true,
+            'label'    => 'register',
+        ));
+
+        // And finally add some CSRF protection
+        $this->addElement('hash', 'csrf', array(
+            'ignore' => true,
+        ));
+    }
+}

@@ -17,14 +17,15 @@ class IndexController extends Zend_Controller_Action
             if ($form->isValid($request->getPost())){
                 $user = new Application_Model_User(null);
                 $mapper  = new Application_Model_UserMapper();
-                //TODO: hash+salt
-                //$pw = password_hash($form->getValue('password'), PASSWORD_DEFAULT);
-                $pw = $form->getValue('password');
-                $mapper->findUser($form->getValue('email'), $pw, $user);
-                if($user->getConfirmation_code() === '1'){
-                    return $this->_helper->redirector('index', 'account');
+                $mapper->findByField('email', $form->getValue('email'), $user);
+                if(password_verify($form->getValue('password'), $user->getPassword())){
+                    if($user->getConfirmation_code() === '1'){
+                        return $this->_helper->redirector('index', 'account');
+                    } else{
+                        $confirm = 'email is not yet confirmed!';
+                    } 
                 } else{
-                    $confirm = 'email is not yet confirmed!';
+                    $confirm = 'email or password not correct';
                 }
             }
         }

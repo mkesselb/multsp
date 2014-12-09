@@ -56,21 +56,7 @@ class Application_Model_UserMapper
         $id = $user->getId();
         $this->getDbTable()->update($data, array('id = ?' => $id));
     }
-    
-    public function findUser($email, $password, Application_Model_User $user){
-        $row = $this->getDbTable()->fetchRow($this->getDbTable()->select()
-            ->where('email = :mail and password = :passw')
-            ->bind(array(':mail'=>$email, ':passw'=>$password)));
-        if($row === null){
-            return;
-        }
-        
-        $user->setId($row->id)
-            ->setEmail($row->email)
-            ->setPassword($row->password)
-            ->setConfirmation_code($row->confirmation_code);
-    }
-    
+
     public function findByField($field, $value, Application_Model_User $user){
         $row = $this->getDbTable()->fetchRow(
             $this->getDbTable()->select()

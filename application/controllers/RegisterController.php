@@ -23,9 +23,7 @@ class RegisterController extends Zend_Controller_Action
                 } else{
                     $user = new Application_Model_User($form->getValues());
                     $user->setConfirmation_code(substr(base64_encode(sha1(mt_rand())), 0, 20));
-                    //TODO: hash+salt
-                    //$pw = password_hash($user->getPassword(), PASSWORD_DEFAULT);
-                    $pw = $user->getPassword();
+                    $pw = password_hash($user->getPassword(), PASSWORD_DEFAULT);
                     $user->setPassword($pw);
                     $mapper->save($user);
                     
@@ -59,8 +57,10 @@ class RegisterController extends Zend_Controller_Action
             $user = new Application_Model_User();
             $mapper = new Application_Model_UserMapper();
             $mapper->findByField('confirmation_code', $confirmcode, $user);
-            $mapper->update($user->setConfirmation_code('1'));
-            $success = 'confirmation successful!';
+            if($user->getConfirmation_code() === $confirmcode){
+                $mapper->update($user->setConfirmation_code('1'));
+                $success = 'confirmation successful!';
+            }
         }
         
         $this->view->success = $success;

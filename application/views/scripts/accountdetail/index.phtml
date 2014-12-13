@@ -1,6 +1,25 @@
 <div id="welcome">
-    <h1>Welcome the account detail view!</h1>
+    <h1><?php echo $this->account->getName() ?></h1>
 </div>
+
+<dl>
+   <p><a href="<?php echo $this->url(
+        array(
+        'controller' => 'createentry',
+        'action'     => 'index'
+        ),
+        'default',
+        true) . '?id='. $this->account->getId() ?>">new entry</a></p>
+</dl>
+
+<dl>
+    <?php foreach ($this->entries as $entry): ?>
+        <p>
+        <?php echo 'Category: ' .  $entry->getCostCategoryId(). ' Price: ' . $entry->getPrice() . ' Date: ' . $entry->getDate();?>
+        </p>
+    <?php endforeach ?>
+</dl>
+
 
 <dl>
    <p><a href="<?php echo $this->url(

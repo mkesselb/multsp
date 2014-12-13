@@ -1,4 +1,5 @@
 <?php
+require_once 'Zend/Session/Namespace.php';
 
 class IndexController extends Zend_Controller_Action
 {
@@ -10,6 +11,7 @@ class IndexController extends Zend_Controller_Action
     public function indexAction()
     {
         $request = $this->getRequest();
+        $ns = new Zend_Session_Namespace('myUltimateSession');
         $form    = new Application_Form_Index();
         $confirm = null;
         
@@ -20,6 +22,7 @@ class IndexController extends Zend_Controller_Action
                 $mapper->findByField('email', $form->getValue('email'), $user);
                 if(password_verify($form->getValue('password'), $user->getPassword())){
                     if($user->getConfirmation_code() === '1'){
+                        $ns->id = $user->getId();
                         return $this->_helper->redirector('index', 'account');
                     } else{
                         $confirm = 'email is not yet confirmed!';
@@ -29,7 +32,7 @@ class IndexController extends Zend_Controller_Action
                 }
             }
         }
-        
+       
         $this->view->confirm = $confirm;
         $this->view->form = $form;
     }

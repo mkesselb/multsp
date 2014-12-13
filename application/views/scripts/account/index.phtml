@@ -1,1 +1,26 @@
-Welcome to your accounts!
+<div id="welcome">
+    <h1>Welcome to your accounts!</h1>
+</div>
+
+ 
+<dl>
+    <?php foreach ($this->results as $result): ?>
+   <p><a href="<?php echo $this->url(
+        array(
+        'controller' => 'accountdetail',
+        'action'     => 'index'
+        ),
+        'default',
+        true) . '?id=' . $result->getId() ?>"><?php echo $result->getName() ?></a></p>
+    <?php endforeach ?>
+</dl>
+
+<div>
+<p><a href = "<?php echo $this->url(
+        array(
+        'controller' => 'createaccount',
+        'action'     => 'index'
+        ),
+        'default',
+        true) ?>">Create new account</a></p>
+</div>

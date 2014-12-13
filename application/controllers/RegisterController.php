@@ -12,7 +12,7 @@ class RegisterController extends Zend_Controller_Action
         $request = $this->getRequest();
         $form    = new Application_Form_Register();
         $duplicate = null;
-        
+      
         if ($this->getRequest()->isPost()){
             if ($form->isValid($request->getPost())){
                 $u = new Application_Model_User(null);

@@ -9,7 +9,7 @@ class CreateAccountController extends Zend_Controller_Action
     public function indexAction()
     {
         $request = $this->getRequest();
-        $ns = new Zend_Session_Namespace('myUltimateSession');
+        $namespace = new Zend_Session_Namespace('myUltimateSession');
         $form    = new Application_Form_Create();
         
         if ($this->getRequest()->isPost()){
@@ -24,7 +24,7 @@ class CreateAccountController extends Zend_Controller_Action
                 $userInAccount = new Application_Model_UserInAccount();
                 $mapperC = new Application_Model_UserInAccountMapper();
                 $mapperA->findByField('code', $code, $account);
-                $userInAccount->setAccountId($account->getId())->setUserId($ns->id)->setConfirmed(1);
+                $userInAccount->setAccountId($account->getId())->setUserId($namespace->id)->setConfirmed(1);
                 $mapperC->save($userInAccount);
               
                 return $this->_helper->redirector('index', 'account');

@@ -60,7 +60,7 @@ class Application_Model_UserInAccountMapper
             $this->getDbTable()->select()
             ->where($field . ' = :value')
             ->bind(array(':value'=>$value)));*/
-        $resultSet = $this->getDbTable()->fetchAll();
+        $resultSet = $this->getDbTable()->fetchAll($field . ' = ' . $value);
         if($resultSet === null){
             return;
         }

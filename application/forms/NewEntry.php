@@ -7,9 +7,17 @@ class Application_Form_NewEntry extends Zend_Form
         // Set the method for the display form to POST
         $this->setMethod('post');
         
+        $namespace = new Zend_Session_Namespace('myUltimateSession');
+        if(isset($namespace->categories)){
+             $options = $namespace->categories;
+        } else {
+            $options = array('' => '');
+        }
+        
         $this->addElement('select','category',array(
             'ignore' => true,
-            'label' => 'category'              
+            'label' => 'category',
+            'multioptions' => $options         
             ));
         
         $this->addElement('text','date',array(

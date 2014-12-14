@@ -8,10 +8,12 @@ class AccountDetailController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $ns = new Zend_Session_Namespace('myUltimateSession');
+        $namespace = new Zend_Session_Namespace('myUltimateSession');
         $form = new Application_Form_NewEntry();
-        if(isset($ns->id)) {
+        if(isset($namespace->id)) {
             $account_id = $_GET['id'];
+            $this->view->test = $account_id;
+            
             $this->view->text = $account_id;
             $account = new Application_Model_Account();
             $mapperA = new Application_Model_AccountMapper();

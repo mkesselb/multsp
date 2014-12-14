@@ -9,8 +9,8 @@ class AccountController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $ns = new Zend_Session_Namespace('myUltimateSession');
-        $user_id = $ns->id;
+        $namespace = new Zend_Session_Namespace('myUltimateSession');
+        $user_id = $namespace->id;
         
         $userInAccount = new Application_Model_UserInAccount(null);
         $mapper  = new Application_Model_UserInAccountMapper();

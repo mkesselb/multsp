@@ -12,13 +12,22 @@
         true) . '?id='. $this->account->getId() ?>">new entry</a></p>
 </dl>
 
-<dl>
+<table>
+  <tr>
+    <th>Category</th>
+    <th>Date</th>
+    <th>Price</th>
+    <th>Comment</th>
+  </tr>
     <?php foreach ($this->entries as $entry): ?>
-        <p>
-        <?php echo 'Category: ' .  $entry->getCostCategoryId(). ' Price: ' . $entry->getPrice() . ' Date: ' . $entry->getDate();?>
-        </p>
+      <tr>
+        <td><?php echo $entry->getCostCategoryId()?></td>
+        <td><?php echo $entry->getDate()?></td>
+        <td><?php echo $entry->getPrice()?></td>
+        <td><?php echo $entry->getComment()?></td>
+      </tr>
     <?php endforeach ?>
-</dl>
+</table>
 
 
 <dl>
@@ -30,3 +39,7 @@
         'default',
         true) ?>">back</a></p>
 </dl>
+
+<?php 
+echo $this->test
+?>

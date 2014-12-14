@@ -67,7 +67,7 @@ class Application_Model_AccountEntryMapper
     }
 
     public function findByField($field, $value){
-            $resultSet = $this->getDbTable()->fetchAll();
+        $resultSet = $this->getDbTable()->fetchAll($field . ' = ' . $value);
         if($resultSet === null){
             return;
         }

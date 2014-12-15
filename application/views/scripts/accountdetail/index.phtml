@@ -9,7 +9,16 @@
         'action'     => 'createentry'
         ),
         'default',
-        true) . '?id='. $this->account->getId() ?>">new entry</a></p>
+        true)?>">new entry</a></p>
+</dl>
+<dl>
+   <p><a href="<?php echo $this->url(
+        array(
+        'controller' => 'accountdetail',
+        'action'     => 'createcategory'
+        ),
+        'default',
+        true)?>">new category</a></p>
 </dl>
 
 <table class="entries">
@@ -21,7 +30,7 @@
   </tr>
     <?php foreach ($this->entries as $entry): ?>
       <tr>
-        <td><?php echo $entry->getCostCategoryId()?></td>
+        <td><?php echo $entry->getCostCategoryName()?></td>
         <td><?php echo $entry->getDate()?></td>
         <td><?php echo $entry->getPrice()?></td>
         <td><?php echo $entry->getComment()?></td>
@@ -40,7 +49,3 @@
         true) ?>">back</a>
         </p>
 </dl>
-
-<?php 
-echo $this->test
-?>

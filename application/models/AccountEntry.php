@@ -4,6 +4,7 @@ class Application_Model_AccountEntry
     protected $id;
     protected $account_id;
     protected $cost_category_id;
+    protected $cost_category_name;
     protected $user_id;
     protected $date;
     protected $price;
@@ -70,6 +71,15 @@ class Application_Model_AccountEntry
     
     public function setCostCategoryId($cost_category_id){
         $this->cost_category_id = $cost_category_id;
+        return $this;
+    }
+    
+    public function getCostCategoryName(){
+        return $this->cost_category_name;
+    }
+    
+    public function setCostCategoryName($cost_category_name){
+        $this->cost_category_name = $cost_category_name;
         return $this;
     }
     

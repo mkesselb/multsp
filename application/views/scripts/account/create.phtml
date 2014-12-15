@@ -5,3 +5,13 @@
 <?php
 $this->form->setAction($this->url());
 echo $this->form;
+?>
+
+<dl>
+<p><a href="<?php echo $this->url(
+    array(
+    'controller' => 'account',
+    'action'     => 'index'),
+    'default',
+    true)?>">back</a></p>
+</dl>

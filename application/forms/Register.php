@@ -6,6 +6,20 @@ class Application_Form_Register extends Zend_Form
     {
         // Set the method for the display form to POST
         $this->setMethod('post');
+        
+        // Add table tag
+        $this->setDecorators(array(
+            'FormElements',
+            array('HtmlTag', array('tag' => 'table')),
+            'Form'
+        ));
+        $this->setElementDecorators(array(
+            'ViewHelper',
+            'Errors',
+            array(array('data' => 'HtmlTag'), array('tag' => 'td')),
+            array('Label', array('tag' => 'td')),
+            array(array('row' => 'HtmlTag'), array('tag' => 'tr'))
+        ));        
 
         // Add an email element
         $this->addElement('text', 'email', array(

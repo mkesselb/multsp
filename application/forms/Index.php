@@ -4,9 +4,25 @@ class Application_Form_Index extends Zend_Form
 {
     public function init()
     {
+                
         // Set the method for the display form to POST
         $this->setMethod('post');
 
+        // Add table tag
+        $this->setDecorators(array(
+            'FormElements',
+            array('HtmlTag', array('tag' => 'table')),
+            'Form'
+        ));
+        
+        $this->setElementDecorators(array(
+            'ViewHelper',
+            'Errors',
+            array(array('data' => 'HtmlTag'), array('tag' => 'td')),
+            array('Label', array('tag' => 'td')),
+            array(array('row' => 'HtmlTag'), array('tag' => 'tr'))
+        ));
+        
         // Add an email element
         $this->addElement('text', 'email', array(
             'label'      => 'Email:',
@@ -19,7 +35,7 @@ class Application_Form_Index extends Zend_Form
 
         // Add the comment element
         $this->addElement('password', 'password', array(
-            'label'      => 'Password:',
+            'label'      => 'Password: ',
             'required'   => true,
             'validators' => array(
                 array('validator' => 'StringLength', 'options' => array(8, 20))

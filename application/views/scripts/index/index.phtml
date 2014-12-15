@@ -1,6 +1,6 @@
 <div id="welcome">
-    <headline><br>Welcome to myUltimateSpendings<br></headline>
-    <largetext><br>Register yourself and join our ultimate web-based accounting software.
+    <headline><br>Welcome to myUltimateSpendings</headline>
+    <largetext><br><br>Register yourself and join our ultimate web-based accounting software.
     <br>It's is easy to use, free and of course it's ultimate!<br><br></largetext>
 </div>
 
@@ -13,11 +13,11 @@ if($this->confirm !== null){
 ?>
 
 <div id="register">
-    <p><a href="<?php echo $this->url(
+    <largetext><a href="<?php echo $this->url(
     array(
         'controller' => 'register',
         'action'     => 'index'
     ),
     'default',
-    true) ?>">Register here</a></p>
+    true) ?>">Register here</a></largetext>
 </div>

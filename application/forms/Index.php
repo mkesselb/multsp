@@ -9,7 +9,7 @@ class Application_Form_Index extends Zend_Form
 
         // Add an email element
         $this->addElement('text', 'email', array(
-            'label'      => 'Email address:',
+            'label'      => 'Email:',
             'required'   => true,
             'filters'    => array('StringTrim'),
             'validators' => array(

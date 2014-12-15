@@ -9,17 +9,6 @@
 	                          // Webserver geladen
 }
    
-input{
-    color: #ffffff; 
-    font-size: 14px; 
-    border: 0px solid #4c4c4c; 
-    background-color: #4c4c4c; 
-    height: 40px; 
-    width: 300px;   
-    padding: 0px;
-}	
-
-
 body, html{ 
            font-family: Champagne;
 	       width: 100%;
@@ -44,6 +33,22 @@ normaltext{
 	color: #ffffff;
 }
  
+input{
+    color: #ffffff; 
+    font-size: 14px; 
+    border: 0px solid #4c4c4c; 
+    background-color: #4c4c4c; 
+    height: 40px; 
+    width: 300px;   
+    padding: 0px;
+}	
+
+form{
+	 color: #ffffff;
+	 font-size: 22px;
+}
+
+
 a:link{ 
 	color: #ffffff;
 }

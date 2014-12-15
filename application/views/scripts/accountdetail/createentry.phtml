@@ -1,0 +1,24 @@
+<div>
+    <h1>new Entry</h1>
+</div>
+
+<?php 
+$this->form->setAction($this->url());
+echo $this->form;
+
+?>
+
+<dl>
+   <p><a href="<?php echo $this->url(
+        array(
+        'controller' => 'accountdetail',
+        'action'     => 'index'
+        ),
+        'default',
+        true) . '?id=' . $this->id ?>">back</a></p>
+</dl>
+
+
+<?php 
+echo $this->test
+?>

@@ -5,14 +5,14 @@
 <dl>
    <p><a href="<?php echo $this->url(
         array(
-        'controller' => 'createentry',
-        'action'     => 'index'
+        'controller' => 'accountdetail',
+        'action'     => 'createentry'
         ),
         'default',
         true) . '?id='. $this->account->getId() ?>">new entry</a></p>
 </dl>
 
-<table>
+<table class="entries">
   <tr>
     <th>Category</th>
     <th>Date</th>
@@ -37,7 +37,8 @@
         'action'     => 'index'
         ),
         'default',
-        true) ?>">back</a></p>
+        true) ?>">back</a>
+        </p>
 </dl>
 
 <?php 

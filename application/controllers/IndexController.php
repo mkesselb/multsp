@@ -12,6 +12,10 @@ class IndexController extends Zend_Controller_Action
     {
         $request = $this->getRequest();
         $namespace = new Zend_Session_Namespace('myUltimateSession');
+        if(isset($namespace->id)){
+            return $this->_helper->redirector('index', 'account');
+        }
+        
         $form    = new Application_Form_Index();
         $confirm = null;
         
@@ -35,5 +39,13 @@ class IndexController extends Zend_Controller_Action
        
         $this->view->confirm = $confirm;
         $this->view->form = $form;
+    }
+    
+    public function logoutAction(){
+        //show login form, and delete session
+        $namespace = new Zend_Session_Namespace('myUltimateSession');
+        unset($namespace->id);
+        
+        return $this->_helper->redirector('index', 'index');
     }
 }

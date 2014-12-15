@@ -9,3 +9,12 @@ echo $this->form;
 if($this->duplicate !== null){
     echo $this->duplicate . '<br>';
 }
+
+?>
+<p><a href="<?php echo $this->url(
+array(
+'controller' => 'index',
+'action'     => 'index'
+),
+'default',
+true) ?>">Back to login</a></p>

@@ -2,25 +2,38 @@
     <h1>Welcome to your accounts!</h1>
 </div>
 
- 
-<dl>
+<table class="acc">
+<tr><th>Account name</th></tr>
     <?php foreach ($this->results as $result): ?>
-   <p><a href="<?php echo $this->url(
+   <tr><td>
+   <a href="<?php echo $this->url(
         array(
         'controller' => 'accountdetail',
         'action'     => 'index'
         ),
         'default',
-        true) . '?id=' . $result->getId() ?>"><?php echo $result->getName() ?></a></p>
+        true) . '?id=' . $result->getId() ?>"><?php echo $result->getName() ?></a>
+    </td></tr>
     <?php endforeach ?>
-</dl>
+</table>
 
 <div>
 <p><a href = "<?php echo $this->url(
         array(
-        'controller' => 'createaccount',
-        'action'     => 'index'
+        'controller' => 'account',
+        'action'     => 'create'
         ),
         'default',
         true) ?>">Create new account</a></p>
+</div>
+
+<div>
+<p><a href = "<?php echo $this->url(
+        array(
+        'controller' => 'index',
+        'action'     => 'logout'
+        ),
+        'default',
+        true) ?>">Logout</a>
+</p>
 </div>

@@ -55,7 +55,9 @@ class Application_Model_CostcategoryMapper
     }
 
     public function findByField($field, $value){
-         $resultSet = $this->getDbTable()->fetchAll();
+        $resultSet = $this->getDbTable()->fetchAll($this->getDbTable()->select()
+            ->where($field . ' = :value')
+            ->bind(array(':value'=>$value)));
         if($resultSet === null){
             return;
         }

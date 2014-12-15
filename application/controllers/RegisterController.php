@@ -38,8 +38,13 @@ class RegisterController extends Zend_Controller_Action
                         ->setSubject('Registration to my-ultimate-spendings')
                         ->send();
                     
+                    //for test only: return confirmation link to user on view
+                    $duplicate = 'registration url: '
+                        . $_SERVER["HTTP_HOST"]
+                        . $_SERVER["REQUEST_URI"]
+                        . '/confirm?confirmation_code=' . $user->getConfirmation_code();
                     //redirect to index/index
-                    return $this->_helper->redirector('index', 'index');
+                    //return $this->_helper->redirector('index', 'index');
                 }
             }
         }

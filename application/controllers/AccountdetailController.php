@@ -11,6 +11,7 @@ class AccountDetailController extends Zend_Controller_Action
         $namespace = new Zend_Session_Namespace('myUltimateSession');
         $form = new Application_Form_NewEntry();
         if(isset($namespace->id)) {
+            //TODO: also check if user_id in session is allowed to access the account
             $account_id = $_GET['id'];
             $this->view->test = $account_id;
             

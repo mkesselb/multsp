@@ -45,6 +45,11 @@ class Application_Model_UserInAccountMapper
         ->setAccountId($row->account_id)
         ->setConfirmed($row->confirmed);
     }
+    
+    public function delete($user_id, $account_id){
+        $result = $this->getDbTable()->delete(
+            array('user_id = ?' => $user_id, 'account_id = ?' => $account_id));
+    }
 
     public function update(Application_Model_UserInAccount $userInAccount){
         $data = array(
@@ -56,10 +61,6 @@ class Application_Model_UserInAccountMapper
     }
 
     public function findByField($field, $value){
-        /*$row = $this->getDbTable()->fetchRow(
-            $this->getDbTable()->select()
-            ->where($field . ' = :value')
-            ->bind(array(':value'=>$value)));*/
         $resultSet = $this->getDbTable()->fetchAll($field . ' = ' . $value);
         if($resultSet === null){
             return;
@@ -73,6 +74,11 @@ class Application_Model_UserInAccountMapper
           $users[] = $userInAccount;
         }
         return $users;
-     
+    }
+    
+    public function authUser($user_id, $account_id){
+        $userInAccount = new Application_Model_UserInAccount();
+        $this->find($user_id, $account_id, $userInAccount);
+        return $userInAccount->getConfirmed();
     }
 }

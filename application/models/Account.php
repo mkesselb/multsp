@@ -4,6 +4,7 @@ class Application_Model_Account
     protected $id;
     protected $name;
     protected $code;
+    protected $confirmed;
 
     public function __construct(array $options = null)
     {
@@ -66,6 +67,15 @@ class Application_Model_Account
 
     public function setId($id){
         $this->id = $id;
+        return $this;
+    }
+    
+    public function getConfirmed(){
+        return $this->confirmed;
+    }
+    
+    public function setConfirmed($confirmed){
+        $this->confirmed = $confirmed;
         return $this;
     }
 }

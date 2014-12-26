@@ -48,4 +48,9 @@ class IndexController extends Zend_Controller_Action
         
         return $this->_helper->redirector('index', 'index');
     }
+    
+    public function expireAction(){
+        $namespace = new Zend_Session_Namespace('myUltimateSession');
+        unset($namespace->id);
+    }
 }

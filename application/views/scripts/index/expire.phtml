@@ -1,0 +1,10 @@
+<?php
+echo 'Your session has expired. Please login again!' . '<br>';
+?>
+<p><a href="<?php echo $this->url(
+    array(
+        'controller' => 'index',
+        'action'     => 'index'
+    ),
+    'default',
+    true) ?>">Click here to login!</a></p>

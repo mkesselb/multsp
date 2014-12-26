@@ -1,0 +1,22 @@
+<div>
+    <headline><br>invite User</headline>
+</div>
+
+<?php
+$this->form->setAction($this->url());
+echo $this->form;
+
+if($this->status !== null){
+    echo $this->status . '<br>';
+}
+?>
+
+<dl>
+<p><a href="<?php echo $this->url(
+array(
+'controller' => 'accountdetail',
+'action'     => 'index'
+),
+'default',
+true) . '?id=' . $this->id ?>">back</a></p>
+</dl>

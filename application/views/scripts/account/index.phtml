@@ -2,6 +2,9 @@
     <headline><br>Welcome to your accounts!</headline>
 </div>
 
+<div id="name">
+    <p><?php echo $this->user->getEmail()?> </p>
+</div>
 <table class="acc">
 <tr><th>Account name</th></tr>
     <?php foreach ($this->results as $result): ?>
@@ -13,6 +16,25 @@
         ),
         'default',
         true) . '?id=' . $result->getId() ?>"><?php echo $result->getName() ?></a>
+    </td><td>
+        <?php
+        if($result->getConfirmed()){
+            //echo 'confirmed';
+        } else{
+            echo '<a href="' . 
+                $this->url(array('controller' => 'account', 'action' => 'confirminvite'),
+                    'default', true) . '?id=' . $result->getId() . '">' . 'confirm invite' . '</a>';
+        }
+        ?>
+    </td><td>
+        <a href="<?php echo $this->url(
+        array(
+        'controller' => 'account',
+        'action'     => 'deleteaccount'
+        ),
+        'default',
+        true) . '?id=' . $result->getId() ?>">delete</a>
+    <td>
     </td></tr>
     <?php endforeach ?>
 </table>

@@ -6,6 +6,7 @@ class Application_Model_AccountEntry
     protected $cost_category_id;
     protected $cost_category_name;
     protected $user_id;
+	protected $user_email;
     protected $date;
     protected $price;
     protected $comment;
@@ -89,6 +90,15 @@ class Application_Model_AccountEntry
     
     public function setUserId($user_id){
         $this->user_id = $user_id;
+        return $this;
+    }
+	
+	 public function getUserEmail(){
+        return $this->user_email;
+    }
+    
+    public function setUserEmail($user_email){
+        $this->user_email = $user_email;
         return $this;
     }
     

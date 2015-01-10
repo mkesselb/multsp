@@ -36,6 +36,7 @@
     <th>Date</th>
     <th>Price</th>
     <th>Comment</th>
+	<th>User</th>
   </tr>
     <?php foreach ($this->entries as $entry): ?>
       <tr>
@@ -43,6 +44,7 @@
         <td><?php echo $entry->getDate()?></td>
         <td><?php echo $entry->getPrice()?></td>
         <td><?php echo $entry->getComment()?></td>
+		<td><?php echo $entry->getUserEmail()?></td>
       </tr>
     <?php endforeach ?>
 </table>

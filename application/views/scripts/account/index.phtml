@@ -33,7 +33,7 @@
         'action'     => 'deleteaccount'
         ),
         'default',
-        true) . '?id=' . $result->getId() ?>">delete</a>
+        true) . '?id=' . $result->getId()?>" onClick="return confirm('Do you really want to delete this account?');">delete</a>
     <td>
     </td></tr>
     <?php endforeach ?>

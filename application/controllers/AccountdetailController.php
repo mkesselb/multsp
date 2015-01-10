@@ -23,10 +23,15 @@ class AccountDetailController extends Zend_Controller_Action
                 $mapper  = new Application_Model_AccountEntryMapper();
                 $results = $mapper->findByField('account_id', $account_id);
                 $mapperC = new Application_Model_CostcategoryMapper();
+				$mapperU = new Application_Model_UserMapper();
+				$users = array();
                 foreach ($results as $result){
                     $cat = new Application_Model_CostCategory();
                     $mapperC->find($result->getCostCategoryId(), $cat);
-                    $result->setCostCategoryName($cat->getName());
+                    $result->setCostCategoryName($cat->getName());    
+					$user = new Application_Model_User();
+                    $mapperU->find($result->getUserId(), $user);
+                    $result->setUserEmail($user->getEmail()); 
                 }
                 
                 $this->view->entries = $results;

@@ -25,6 +25,24 @@ class AccountDetailController extends Zend_Controller_Action
                 $mapperC = new Application_Model_CostcategoryMapper();
 				$mapperU = new Application_Model_UserMapper();
 				$users = array();
+				
+				//array, key = categoryname, value = 0
+				$pieChartCategories = array();
+				$categories = $mapperC->findByField('account_id', $account_id);
+				foreach($categories as $category){
+				    $pieChartCategories[$category->getName()] = 0;
+				}
+				
+				//array, key = user_email, value = 0
+				$pieChartUsers = array();
+				$usersInAccount = array();
+				$usersInAccount = $uamapper->findByField('account_id', $account_id);
+				foreach ($usersInAccount as $userInAccount){
+				    $user = new Application_Model_User();
+				    $mapperU->findByField('id', $userInAccount->getUserId(), $user);
+				    $pieChartUsers[$user->getEmail()] = 0;
+				}
+				
                 foreach ($results as $result){
                     $cat = new Application_Model_CostCategory();
                     $mapperC->find($result->getCostCategoryId(), $cat);
@@ -32,9 +50,16 @@ class AccountDetailController extends Zend_Controller_Action
 					$user = new Application_Model_User();
                     $mapperU->find($result->getUserId(), $user);
                     $result->setUserEmail($user->getEmail()); 
+                    $pieChartCategories[$cat->getName()] += $result->getPrice();
+                    $pieChartUsers[$user->getEmail()] += $result->getPrice();
+                   
                 }
                 
                 $this->view->entries = $results;
+                
+                $this->view->pieChartCategories = $pieChartCategories;
+                $this->view->pieChartUsers= $pieChartUsers;
+                
             } else{
                 return $this->_helper->redirector('credentials');
             }            

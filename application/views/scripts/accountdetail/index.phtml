@@ -1,3 +1,9 @@
+<head>
+<script type="text/javascript" src = "Chart.js"></script>
+ <script type="text/javascript" src = "../application/views/scripts/accountdetail/charts.js"></script>
+
+</head>
+<body>
 <div id="welcome">
     <headline><br><?php echo $this->account->getName() ?></headline>
 </div>
@@ -29,7 +35,18 @@
         'default',
         true)?>">invite user</a></p>
 </dl>
-
+     
+      
+        <div style="width: 50%">
+			<canvas id="canvas" height="200" width="200"></canvas>
+		</div>
+		 <div style="width: 50%">
+			<canvas id="canvas2" height="200" width="200"></canvas>
+		</div>
+		
+		<script>drawPieCategories(<?php echo json_encode($this->pieChartCategories) ?>);</script>
+		<script>drawPieUsers(<?php echo json_encode($this->pieChartUsers) ?>);</script>
+	
 <table class="entries">
   <tr>
     <th>Category</th>
@@ -60,3 +77,4 @@
         true) ?>">back</a>
         </p>
 </dl>
+</body>

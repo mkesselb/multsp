@@ -44,7 +44,7 @@ class Application_Form_NewEntry extends Zend_Form
         $this->addElement('text','price',array(
             'ignore' => true,
             'label' => 'price',
-            'validator' => array('Float')
+            'validators' => array('Float'),
         ));
         
         $this->addElement('text','comment',array(

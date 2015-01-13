@@ -7,11 +7,11 @@
 </head>
 <body>
 <div>
-    <headline><br>new Entry</headline>
+    <headline><br>edit Entry</headline>
 </div>
 
 <?php 
-$this->form->setAction($this->url());
+$this->form->setAction($this->url() . '?id=' . $this->id);
 echo $this->form;
 ?>
 
@@ -22,7 +22,6 @@ echo $this->form;
 	});
 });*/
 /*$('.datepicker').pickadate({
-  // Escape any “rule” characters with an exclamation mark (!).
   format: 'yyyy-mm-dd',
   formatSubmit: 'yyyy-mm-dd'
 });*/
@@ -35,6 +34,6 @@ echo $this->form;
         'action'     => 'index'
         ),
         'default',
-        true) . '?id=' . $this->id ?>">back</a></p>
+        true) . '?id=' . $this->accId ?>">back</a></p>
 </dl>
 </body>

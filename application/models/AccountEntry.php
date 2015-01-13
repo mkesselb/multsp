@@ -112,11 +112,11 @@ class Application_Model_AccountEntry
     }
     
     public function getPrice(){
-        return $this->price;
+        return str_replace('.', ',', $this->price);
     }
     
     public function setPrice($price){
-        $this->price = $price;
+        $this->price = str_replace(',', '.', $price);
         return $this;
     }
     

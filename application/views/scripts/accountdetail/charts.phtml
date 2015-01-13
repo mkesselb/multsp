@@ -1,0 +1,36 @@
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript" src = "Chart.js"></script>
+	<script type="text/javascript" src = "../application/views/scripts/accountdetail/charts.js"></script>
+</head>
+
+<body>
+<div id="welcome">
+    <headline><br><?php echo $this->account->getName() ?> - Charts</headline>
+</div>
+
+<div style="width: 50%">
+	<canvas id="canvas" height="200" width="200"></canvas>
+</div>
+ <div style="width: 50%">
+	<canvas id="canvas2" height="200" width="200"></canvas>
+</div> 
+
+<dl>
+   <p><a href="<?php echo $this->url(
+        array(
+        'controller' => 'accountdetail',
+        'action'     => 'index'
+        ),
+        'default',
+        true) . '?id=' . $this->accId ?>">back</a></p>
+</dl>
+
+
+<script>
+	$(document).ready(function(){
+	   	drawPie("canvas", <?php echo json_encode($this->pieChartCategories) ?>);
+		drawPie("canvas2", <?php echo json_encode($this->pieChartUsers) ?>);
+	});
+</script>
+</body>

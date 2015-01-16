@@ -1,7 +1,7 @@
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script type="text/javascript" src = "Chart.js"></script>
-	<script type="text/javascript" src = "../application/views/scripts/accountdetail/charts.js"></script>
+	<?php echo $this->headScript()->appendFile($this->baseUrl('/Chart.js'));?>
+	<?php echo $this->headScript()->appendFile($this->baseUrl('/../application/views/scripts/accountdetail/charts.js'));?>
 </head>
 
 <body>

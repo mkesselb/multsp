@@ -1,9 +1,9 @@
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script type="text/javascript" src = "../library/datepicker/compressed/picker.js"></script>
-	<script type="text/javascript" src = "../library/datepicker/compressed/picker.date.js"></script>
-	<script src = "../library/datepicker/themes/default.css"></script>
-	<script src = "../library/datepicker/themes/default.date.css"></script>
+	<?php echo $this->headScript()->appendFile($this->baseUrl('/../library/datepicker/compressed/picker.js'));?>
+	<?php echo $this->headScript()->appendFile($this->baseUrl('/../library/datepicker/compressed/picker.date.js'));?>
+	<?php echo $this->headScript()->appendFile($this->baseUrl('/../library/datepicker/themes/default.css'));?>
+	<?php echo $this->headScript()->appendFile($this->baseUrl('/../library/datepicker/themes/default.date.css'));?>
 </head>
 <body>
 <div>
@@ -16,16 +16,12 @@ echo $this->form;
 ?>
 
 <script>
-/*$(document).ready(function(){
-	$(function(){
-		$('#datepicker').pickadate();
+$('#date').on('click', function(){
+	$('#date').pickadate({
+	  format: 'yyyy-mm-dd',
+	  formatSubmit: 'yyyy-mm-dd'
 	});
-});*/
-/*$('.datepicker').pickadate({
-  // Escape any “rule” characters with an exclamation mark (!).
-  format: 'yyyy-mm-dd',
-  formatSubmit: 'yyyy-mm-dd'
-});*/
+});
 </script>
 
 <dl>

@@ -59,6 +59,13 @@ class AccountController extends Zend_Controller_Action
                     ->setUserId($namespace->id)
                     ->setConfirmed(1);
                     $mapperC->save($userInAccount);
+                    
+                    //also create default category
+                    $cat = new Application_Model_Costcategory(null);
+                    $cat->setAccountId($account->getId())
+                    	->setName('default');
+                    $catMapper = new Application_Model_CostcategoryMapper();
+                    $catMapper->save($cat);
             
                     return $this->_helper->redirector('index', 'account');
                 }

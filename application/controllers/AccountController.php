@@ -41,7 +41,11 @@ class AccountController extends Zend_Controller_Action
         $request = $this->getRequest();
         $namespace = new Zend_Session_Namespace('myUltimateSession');
         if(isset($namespace->id)) {
-            $form    = new Application_Form_Create();
+			$form    = new Application_Form_Create();
+			$user = new Application_Model_User();
+					$umapper = new Application_Model_UserMapper();
+					$umapper->find($namespace->id, $user);
+					$this->view->user = $user;
             
             if ($this->getRequest()->isPost()){
                 if ($form->isValid($request->getPost())){
@@ -59,6 +63,7 @@ class AccountController extends Zend_Controller_Action
                     ->setUserId($namespace->id)
                     ->setConfirmed(1);
                     $mapperC->save($userInAccount);
+					
                     
                     //also create default category
                     $cat = new Application_Model_Costcategory(null);

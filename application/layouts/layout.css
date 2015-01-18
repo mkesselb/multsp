@@ -11,7 +11,7 @@
    
 body, html{ 
            font-family: Champagne;
-	       width: 100%;
+	   width: 100%;
            height: 100%;
            overflow: hidden;}
 	
@@ -62,8 +62,9 @@ a:visited{
        left: 0;
        border: 0;
        z-index: 1;
-       width: 100%;
-       height: 100%;
+       width: 100;
+       height: 100;
+	background-attachment:inherit;
 }
 #logoImg{ position: absolute;
        top: 0;
@@ -72,6 +73,14 @@ a:visited{
        z-index: 1;
        width: 400px;
        height: 400px;
+}
+#logosmallImg{ position: absolute;
+       top: 0;
+       left: 0;
+       border: 0;
+       z-index: 1;
+       width: 150px;
+       height: 150px;
 }
 /* Body-Dummy absolut über BG-Image legen; Scrollbar bei Bedarf einblenden */
 #bodyDiv{ position: absolute;
@@ -83,16 +92,26 @@ a:visited{
          text-align: left;
 }
 #logoDiv{
-	        width: 400px;
+	    width: 400px;
             height: 400px;
 }
-#loginDiv{
-            background: #c80a00;
-	        margin-top: -400px;    
+#contentDiv{
+            background: #990000;
+	    margin-top: -400px;    
             margin-left: 400px;
             height: 400px;
+}	
+#logosmallDiv{
+	    width: 150px;
+            height: 150px;
 }
-#loginContent{
+#contentsmallDiv{
+            background: #990000;
+	    margin-top: -150px;    
+            margin-left: 150px;
+            height: 150px;
+}
+#content{
             margin-left: 100px;
 }
 //-->

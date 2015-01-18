@@ -1,81 +1,110 @@
-<body>
-<div id="welcome">
-    <headline><br><?php echo $this->account->getName() ?></headline>
+<img id="bgImg" src="<?php echo $this->baseURL();?>/graphics/background_dark.jpg" >
+<div id="bodyDiv">
+	<div id="logosmallDiv"><img id="logosmallImg" src="<?php echo $this->baseURL();?>/graphics/logo_small.jpg" "></div>
+	<div id="contentsmallDiv">
+		<div id="content">
+			<div id="name">
+				<normaltext><br><?php echo $this->user->getEmail()?> </normaltext>
+			</div>
+			<div>
+			<p><a href = "<?php echo $this->url(
+					array(
+					'controller' => 'index',
+					'action'     => 'logout'
+					),
+					'default',
+					true) ?>">Logout</a>
+			</p>
+			</div>
+			<div id="welcome">
+				<headline><?php echo $this->account->getName() ?></headline><br><br>
+			</div>
+
+			<dl>
+			   <p>	<a href="<?php echo $this->url(
+					array(
+					'controller' => 'accountdetail',
+					'action'     => 'charts'
+					),
+					'default',
+					true) . '?id=' . $this->accId?>">view charts</a>
+
+					<a href="<?php echo $this->url(
+					array(
+					'controller' => 'accountdetail',
+					'action'     => 'createentry'
+					),
+					'default',
+					true)?>">new entry</a>
+			
+					<a href="<?php echo $this->url(
+					array(
+					'controller' => 'accountdetail',
+					'action'     => 'createcategory'
+					),
+					'default',
+					true)?>">new category</a>
+					
+					<a href="<?php echo $this->url(
+					array(
+					'controller' => 'accountdetail',
+					'action'     => 'inviteuser'
+					),
+					'default',
+					true)?>">invite user</a></p>
+			</dl>
+			<normaltext>	
+			<table class="entries">
+			  <colgroup>
+				<col width="150">
+				<col width="150">
+				<col width="100">
+				<col width="200">
+				<col width="150">
+				<col width="50">
+			  </colgroup>
+			  <tr>
+				<th><largetext>Category</largetext></th>
+				<th><largetext>Date</largetext></th>
+				<th><largetext>Price</largetext></th>
+				<th><largetext>Comment</largetext></th>
+				<th><largetext>User</largetext></th>
+				</tr>
+				  
+					<?php foreach ($this->entries as $entry): ?>
+					  <tr>
+						<td><?php echo $entry->getCostCategoryName()?></td>
+						<td><?php echo $entry->getDate()?></td>
+						<td><?php echo $entry->getPrice()?></td>
+						<td><?php echo $entry->getComment()?></td>
+						<td><?php echo $entry->getUserEmail()?></td>
+						<td><a href="<?php echo $this->url(
+						array(
+						'controller' => 'accountdetail',
+						'action'     => 'editentry'
+						),
+						'default',
+						true) . '?id=' . $entry->getId() ?>">edit</a></td>
+						
+					
+				</tr>
+				<?php endforeach ?>
+				
+			</table>
+			</normaltext>
+
+
+			<dl>
+			   <p><a href="<?php echo $this->url(
+					array(
+					'controller' => 'account',
+					'action'     => 'index'
+					),
+					'default',
+					true) ?>">back</a>
+					</p>
+			</dl>
+			</body>
+		</div>
+	</div>
 </div>
-
-<dl>
-   <p><a href="<?php echo $this->url(
-        array(
-        'controller' => 'accountdetail',
-        'action'     => 'charts'
-        ),
-        'default',
-        true) . '?id=' . $this->accId?>">view charts</a></p>
-</dl>
-
-<dl>
-   <p><a href="<?php echo $this->url(
-        array(
-        'controller' => 'accountdetail',
-        'action'     => 'createentry'
-        ),
-        'default',
-        true)?>">new entry</a></p>
-</dl>
-<dl>
-   <p><a href="<?php echo $this->url(
-        array(
-        'controller' => 'accountdetail',
-        'action'     => 'createcategory'
-        ),
-        'default',
-        true)?>">new category</a></p>
-</dl>
-<dl>
-   <p><a href="<?php echo $this->url(
-        array(
-        'controller' => 'accountdetail',
-        'action'     => 'inviteuser'
-        ),
-        'default',
-        true)?>">invite user</a></p>
-</dl>
-	
-<table class="entries">
-  <tr>
-    <th>Category</th>
-    <th>Date</th>
-    <th>Price</th>
-    <th>Comment</th>
-	<th>User</th>
-  </tr>
-    <?php foreach ($this->entries as $entry): ?>
-      <tr>
-        <td><?php echo $entry->getCostCategoryName()?></td>
-        <td><?php echo $entry->getDate()?></td>
-        <td><?php echo $entry->getPrice()?></td>
-        <td><?php echo $entry->getComment()?></td>
-		<td><?php echo $entry->getUserEmail()?></td>
-		<td><a href="<?php echo $this->url(
-        array(
-        'controller' => 'accountdetail',
-        'action'     => 'editentry'
-        ),
-        'default',
-        true) . '?id=' . $entry->getId() ?>">edit</a></td>
-      </tr>
-    <?php endforeach ?>
-</table>
-
-
-<dl>
-   <p><a href="<?php echo $this->url(
-        array(
-        'controller' => 'account',
-        'action'     => 'index'
-        ),
-        'default',
-        true) ?>">back</a>
-        </p>
-</dl>
-</body>

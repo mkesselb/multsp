@@ -1,20 +1,28 @@
-<div id="welcome">
-    <headline><br>Register to My Ultimate Spendings!<br><br></headline>
+<img id="bgImg" src="<?php echo $this->baseURL();?>/graphics/background.jpg" >
+<div id="bodyDiv">
+	<div id="logoDiv"><img id="logoImg" src="<?php echo $this->baseURL();?>/graphics/logo_large.jpg" "></div>
+	<div id="contentDiv">
+		<div id="content">
+			<div id="welcome">
+				<headline><br>Register to My Ultimate Spendings!<br><br></headline>
+			</div>
+
+			<?php
+			$this->form->setAction($this->url());
+			echo $this->form;
+
+			if($this->duplicate !== null){
+				echo $this->duplicate . '<br>';
+			}
+
+			?>
+			<largetext><a href="<?php echo $this->url(
+			array(
+			'controller' => 'index',
+			'action'     => 'index'
+			),
+			'default',
+			true) ?>">Back to login</a></largetext>
+		</div>
+	</div>
 </div>
-
-<?php
-$this->form->setAction($this->url());
-echo $this->form;
-
-if($this->duplicate !== null){
-    echo $this->duplicate . '<br>';
-}
-
-?>
-<largetext><a href="<?php echo $this->url(
-array(
-'controller' => 'index',
-'action'     => 'index'
-),
-'default',
-true) ?>">Back to login</a></largetext>

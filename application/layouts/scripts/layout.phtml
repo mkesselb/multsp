@@ -1,21 +1,14 @@
 <?php echo $this->doctype() ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>multsp</title>
-  <?php echo $this->headLink()->appendStylesheet('/multsp/application/layouts/layout.css') ?>
-</head>
+	<head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  <title>multsp</title>
+	  <?php echo $this->headLink()->appendStylesheet('/multsp/application/layouts/layout.css') ?>
+	</head>
 
-<body>
-<img id="bgImg" src="<?php echo $this->baseURL();?>/graphics/background.jpg" >
-<div id="bodyDiv">
-    <div id="logoDiv"><img id="logoImg" src="<?php echo $this->baseURL();?>/graphics/logo_large.jpg" "></div>
-    <div id="loginDiv">
-        <div id="loginContent"><?php echo $this->layout()->content ?></div>
-    </div>
-</div>
-
-
-
-</body>
+	<body>
+		<?php echo $this->layout()->content ?>
+	</body>
 </html>
+
+

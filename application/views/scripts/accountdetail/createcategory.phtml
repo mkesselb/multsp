@@ -1,18 +1,39 @@
-<div>
-    <headline><br>new Category</headline>
+<img id="bgImg" src="<?php echo $this->baseURL();?>/graphics/background_dark.jpg" >
+<div id="bodyDiv">
+	<div id="logosmallDiv"><img id="logosmallImg" src="<?php echo $this->baseURL();?>/graphics/logo_small.jpg" "></div>
+	<div id="contentsmallDiv">
+		<div id="content">
+			<div id="name">
+				<normaltext><br><?php echo $this->user->getEmail()?> </normaltext>
+			</div>
+			<div>
+			<p><a href = "<?php echo $this->url(
+					array(
+					'controller' => 'index',
+					'action'     => 'logout'
+					),
+					'default',
+					true) ?>">Logout</a>
+			</p>
+			</div>
+			<div>
+				<headline>new Category</headline><br><br>
+			</div>
+
+			<?php 
+			$this->form->setAction($this->url());
+			echo $this->form;
+			?>
+
+			<dl>
+			   <p><a href="<?php echo $this->url(
+					array(
+					'controller' => 'accountdetail',
+					'action'     => 'index'
+					),
+					'default',
+					true) . '?id=' . $this->id ?>">back</a></p>
+			</dl>
+		</div>
+	</div>
 </div>
-
-<?php 
-$this->form->setAction($this->url());
-echo $this->form;
-?>
-
-<dl>
-   <p><a href="<?php echo $this->url(
-        array(
-        'controller' => 'accountdetail',
-        'action'     => 'index'
-        ),
-        'default',
-        true) . '?id=' . $this->id ?>">back</a></p>
-</dl>

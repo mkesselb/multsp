@@ -12,6 +12,11 @@ class AccountDetailController extends Zend_Controller_Action
         if(isset($namespace->id)) {
             $account_id = $_GET['id'];
             $namespace->account_id = $account_id;
+			
+			$user = new Application_Model_User();
+					$umapper = new Application_Model_UserMapper();
+					$umapper->find($namespace->id, $user);
+					$this->view->user = $user;
             
             $uamapper = new Application_Model_UserInAccountMapper();
             if($uamapper->authUser($namespace->id, $account_id)){
@@ -55,6 +60,11 @@ class AccountDetailController extends Zend_Controller_Action
                 $mapperC  = new Application_Model_CostcategoryMapper();
                 $categories = $mapperC->findByField('account_id', $account_id);
                 
+				$user = new Application_Model_User();
+					$umapper = new Application_Model_UserMapper();
+					$umapper->find($namespace->id, $user);
+					$this->view->user = $user;
+				
                 $categorynames = array();
                 foreach($categories as $category){
                     $categorynames[$category->getId()] = $category->getName();
@@ -103,6 +113,11 @@ class AccountDetailController extends Zend_Controller_Action
                 $mapperC  = new Application_Model_CostcategoryMapper();
                 $categories = $mapperC->findByField('account_id', $account_id);
                 
+				$user = new Application_Model_User();
+					$umapper = new Application_Model_UserMapper();
+					$umapper->find($namespace->id, $user);
+					$this->view->user = $user;
+				
                 $categorynames = array();
                 foreach($categories as $category){
                     $categorynames[$category->getId()] = $category->getName();
@@ -155,6 +170,11 @@ class AccountDetailController extends Zend_Controller_Action
         if(isset($namespace->id)){
             $account_id = $namespace->account_id;
             
+			$user = new Application_Model_User();
+					$umapper = new Application_Model_UserMapper();
+					$umapper->find($namespace->id, $user);
+					$this->view->user = $user;
+			
             $uamapper = new Application_Model_UserInAccountMapper();
             if($uamapper->authUser($namespace->id, $account_id)){
                 $form = new Application_Form_Category();
@@ -190,6 +210,12 @@ class AccountDetailController extends Zend_Controller_Action
         
         $uamapper = new Application_Model_UserInAccountMapper();
         if($uamapper->authUser($namespace->id, $account_id)){
+		
+				$user = new Application_Model_User();
+					$umapper = new Application_Model_UserMapper();
+					$umapper->find($namespace->id, $user);
+					$this->view->user = $user;
+		
             if ($request->isPost()){
                 if ($form->isValid($request->getPost())){
                     $email = $form->getValue('email');
@@ -236,6 +262,12 @@ class AccountDetailController extends Zend_Controller_Action
             
             $uamapper = new Application_Model_UserInAccountMapper();
             if($uamapper->authUser($namespace->id, $account_id)){
+			
+				$user = new Application_Model_User();
+					$umapper = new Application_Model_UserMapper();
+					$umapper->find($namespace->id, $user);
+					$this->view->user = $user;
+			
                 $account = new Application_Model_Account();
                 $mapperA = new Application_Model_AccountMapper();
                 $mapperA->findByField('id', $account_id, $account);

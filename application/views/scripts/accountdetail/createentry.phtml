@@ -1,36 +1,55 @@
-<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<?php echo $this->headScript()->appendFile($this->baseUrl('/../library/datepicker/compressed/picker.js'));?>
-	<?php echo $this->headScript()->appendFile($this->baseUrl('/../library/datepicker/compressed/picker.date.js'));?>
-	<?php echo $this->headScript()->appendFile($this->baseUrl('/../library/datepicker/themes/default.css'));?>
-	<?php echo $this->headScript()->appendFile($this->baseUrl('/../library/datepicker/themes/default.date.css'));?>
-</head>
-<body>
-<div>
-    <headline><br>new Entry</headline>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<?php echo $this->headScript()->appendFile($this->baseUrl('/../library/datepicker/compressed/picker.js'));?>
+<?php echo $this->headScript()->appendFile($this->baseUrl('/../library/datepicker/compressed/picker.date.js'));?>
+<?php echo $this->headScript()->appendFile($this->baseUrl('/../library/datepicker/themes/default.css'));?>
+<?php echo $this->headScript()->appendFile($this->baseUrl('/../library/datepicker/themes/default.date.css'));?>
+
+<img id="bgImg" src="<?php echo $this->baseURL();?>/graphics/background_dark.jpg" >
+<div id="bodyDiv">
+	<div id="logosmallDiv"><img id="logosmallImg" src="<?php echo $this->baseURL();?>/graphics/logo_small.jpg" "></div>
+	<div id="contentsmallDiv">
+		<div id="content">
+			<div id="name">
+				<normaltext><br><?php echo $this->user->getEmail()?> </normaltext>
+			</div>
+			<div>
+			<p><a href = "<?php echo $this->url(
+					array(
+					'controller' => 'index',
+					'action'     => 'logout'
+					),
+					'default',
+					true) ?>">Logout</a>
+			</p>
+			</div>
+
+			<div>
+				<headline>new Entry</headline><br><br>
+			</div>
+
+			<?php 
+			$this->form->setAction($this->url());
+			echo $this->form;
+			?>
+
+			<script>
+			$('#date').on('click', function(){
+				$('#date').pickadate({
+				  format: 'yyyy-mm-dd',
+				  formatSubmit: 'yyyy-mm-dd'
+				});
+			});
+			</script>
+
+			<dl>
+			   <p><a href="<?php echo $this->url(
+					array(
+					'controller' => 'accountdetail',
+					'action'     => 'index'
+					),
+					'default',
+					true) . '?id=' . $this->id ?>">back</a></p>
+			</dl>
+		</div>
+	</div>
 </div>
-
-<?php 
-$this->form->setAction($this->url());
-echo $this->form;
-?>
-
-<script>
-$('#date').on('click', function(){
-	$('#date').pickadate({
-	  format: 'yyyy-mm-dd',
-	  formatSubmit: 'yyyy-mm-dd'
-	});
-});
-</script>
-
-<dl>
-   <p><a href="<?php echo $this->url(
-        array(
-        'controller' => 'accountdetail',
-        'action'     => 'index'
-        ),
-        'default',
-        true) . '?id=' . $this->id ?>">back</a></p>
-</dl>
-</body>

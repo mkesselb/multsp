@@ -89,6 +89,8 @@ class AccountDetailController extends Zend_Controller_Action
                         
                         return $this->_redirect('accountdetail/index?id=' . $account_id);
                     }
+                } else{
+                	$form->getElement('date')->setValue(date("Y-m-d"));
                 }
                 
                 $this->view->form = $form;

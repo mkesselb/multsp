@@ -1,8 +1,22 @@
 <?php
+/**
+ * Model mapper class which offers methods to save and fetch cost category objects
+ * from the corresponding database table.
+ *
+ * @author mkesselb, comoessl, polschan
+ */
 class Application_Model_CostcategoryMapper
 {
+	/** DB table object, of type Zend_Db_Table_Abstract. */
     protected $_dbTable;
 
+    /**
+     * Sets the database table of this object to parameter database table.
+     * Parameter shall be of type Zend_Db_Table_Abstract.
+     * @param Zend_Db_Table_Abstract $dbTable	the database table object
+     * @throws Exception
+     * @return Application_Model_CostcategoryMapper	this changed object
+     */
     public function setDbTable($dbTable)
     {
         if (is_string($dbTable)) {
@@ -15,6 +29,10 @@ class Application_Model_CostcategoryMapper
         return $this;
     }
 
+    /**
+     * Returns the database table object.
+     * @return Zend_Db_Table_Abstract
+     */
     public function getDbTable()
     {
         if (null === $this->_dbTable) {
@@ -23,6 +41,10 @@ class Application_Model_CostcategoryMapper
         return $this->_dbTable;
     }
 
+    /**
+     * Saves parameter cost_category object to the database table of this mapper. 
+     * @param Application_Model_Costcategory $category	the cost_category to be saved
+     */
     public function save(Application_Model_Costcategory $category)
     {
         $data = array(
@@ -33,6 +55,11 @@ class Application_Model_CostcategoryMapper
         $this->getDbTable()->insert($data);
     }
 
+    /**
+     * Finds the cost category object from the corresponding table with parameter id.
+     * @param int $id	the cost category id to be found
+     * @param Application_Model_CostCategory $category	the object to be enriched
+     */
     public function find($id, Application_Model_CostCategory $category)
     {
         $result = $this->getDbTable()->find($id);
@@ -45,6 +72,10 @@ class Application_Model_CostcategoryMapper
         ->setAccountId($row->account_id);
     }
 
+    /**
+     * Updates the database table with parameter cost category.
+     * @param Application_Model_CostCategory $category	the cost category to be saved
+     */
     public function update(Application_Model_CostCategory $category){
         $data = array(
             'name' => $category->getName(),
@@ -54,6 +85,12 @@ class Application_Model_CostcategoryMapper
         $this->getDbTable()->update($data, array('id = ?' => $id));
     }
 
+    /**
+     * Finds the cost category data from the table by a specified field-value matching.
+     * @param string $field	field name to be found
+     * @param $value	value to be found
+     * @return void|multitype:Application_Model_CostCategory	a list of cost category objects
+     */
     public function findByField($field, $value){
         $resultSet = $this->getDbTable()->fetchAll($this->getDbTable()->select()
             ->where($field . ' = :value')

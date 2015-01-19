@@ -1,8 +1,22 @@
 <?php
+/**
+ * Model mapper class which offers methods to save and fetch account objects from the
+ * corresponding database table.
+ *
+ * @author mkesselb, comoessl, polschan
+ */
 class Application_Model_AccountMapper
 {
+	/** DB table object, of type Zend_Db_Table_Abstract. */
     protected $_dbTable;
 
+    /**
+     * Sets the database table of this object to parameter database table.
+     * Parameter shall be of type Zend_Db_Table_Abstract.
+     * @param Zend_Db_Table_Abstract $dbTable	the database table object
+     * @throws Exception
+     * @return Application_Model_AccountMapper	this changed object
+     */
     public function setDbTable($dbTable)
     {
         if (is_string($dbTable)) {
@@ -15,6 +29,10 @@ class Application_Model_AccountMapper
         return $this;
     }
 
+    /**
+     * Returns the database table object.
+     * @return Zend_Db_Table_Abstract
+     */
     public function getDbTable()
     {
         if (null === $this->_dbTable) {
@@ -23,6 +41,10 @@ class Application_Model_AccountMapper
         return $this->_dbTable;
     }
 
+    /**
+     * Saves parameter account model object to the database table of this mapper.
+     * @param Application_Model_Account $account	the account object to be saved
+     */
     public function save(Application_Model_Account $account)
     {
         $data = array(
@@ -33,6 +55,11 @@ class Application_Model_AccountMapper
         $this->getDbTable()->insert($data);
     }
 
+    /**
+     * Finds an account in the corresponding table with parameter id.
+     * @param int $id	the id to be found
+     * @param Application_Model_Account $account	the account object to be enriched
+     */
     public function find($id, Application_Model_Account $account)
     {
         $result = $this->getDbTable()->find($id);
@@ -45,6 +72,10 @@ class Application_Model_AccountMapper
         ->setCode($row->code);
     }
 
+    /**
+     * Updates the database table with parameter account.
+     * @param Application_Model_Account $account	the account object to be saved
+     */
     public function update(Application_Model_Account $account){
         $data = array(
             'name' => $account->getName(),
@@ -54,6 +85,12 @@ class Application_Model_AccountMapper
         $this->getDbTable()->update($data, array('id = ?' => $id));
     }
 
+    /**
+     * Finds the account data from the table by a specified field-value matching.
+     * @param string $field	field name to be found
+     * @param $value	value to be found
+     * @param Application_Model_Account $account	the account object to be enriched
+     */
     public function findByField($field, $value, Application_Model_Account $account){
         $row = $this->getDbTable()->fetchRow(
             $this->getDbTable()->select()

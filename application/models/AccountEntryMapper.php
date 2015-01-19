@@ -44,10 +44,17 @@ class Application_Model_AccountEntryMapper
             return;
         }
         $row = $result->current();
+        
+        $cat = new Application_Model_CostCategory();
+        $cat->setId($row->cost_category_id);
+        
+        $user = new Application_Model_User();
+        $user->setId($row->user_id);
+        
         $accountentry->setId($row->id)
         ->setAccountId($row->account_id)
-        ->setCostCategoryId($row->cost_category_id)
-        ->setUserId($row->user_id)
+        ->setCostCategory($cat)
+        ->setUser($user)
         ->setDate($row->date)
         ->setPrice($row->price)
         ->setComment($row->comment);
@@ -73,11 +80,17 @@ class Application_Model_AccountEntryMapper
         }
         $accountentries = array();
         foreach ($resultSet as $row){
+        	$cat = new Application_Model_CostCategory();
+        	$cat->setId($row->cost_category_id);
+        	
+        	$user = new Application_Model_User();
+        	$user->setId($row->user_id);
+        	
             $accountentry = new Application_Model_AccountEntry();
             $accountentry->setId($row->id)
             ->setAccountId($row->account_id)
-            ->setCostCategoryId($row->cost_category_id)
-            ->setUserId($row->user_id)
+            ->setCostCategory($cat)
+            ->setUser($user)
             ->setDate($row->date)
             ->setPrice($row->price)
             ->setComment($row->comment);

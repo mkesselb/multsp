@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `account_entries` (
   `cost_category_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `date` date NOT NULL,
-  `price` float(11) NOT NULL,
+  `price` text NOT NULL,
   `comment` text COLLATE utf16_bin NOT NULL,
   PRIMARY KEY (`id`,`account_id`,`cost_category_id`,`user_id`),
   KEY `account_id` (`account_id`),

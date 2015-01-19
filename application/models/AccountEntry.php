@@ -13,17 +13,11 @@ class Application_Model_AccountEntry
     /** Database account_id the entry is tied to. */
     protected $account_id;
     
-    /** Database cost category id the entry is tied to. */
-    protected $cost_category_id;
-    //TODO: use costcategory class instead of id/name of costcat
-    /** Name of the tied cost category. */
-    protected $cost_category_name;
-    
-    /** Database id of the user that made the entry. */
-    protected $user_id;
-    //TODO: use user class insted of id/email
-    /** Email of the user that made the entry. */
-	protected $user_email;
+    /** Cost category object holding cost category id and name. */
+    protected $cost_category;
+	
+	/** User object holding user id and email. */
+	protected $user;
 	
 	/** Date string when the entry was made. */
     protected $date;
@@ -131,7 +125,7 @@ class Application_Model_AccountEntry
      * Returns the cost_category_id.
      */
     public function getCostCategoryId(){
-        return $this->cost_category_id;
+        return $this->cost_category->getId();
     }
     
     /**
@@ -140,7 +134,7 @@ class Application_Model_AccountEntry
      * @return Application_Model_AccountEntry	the changed object
      */
     public function setCostCategoryId($cost_category_id){
-        $this->cost_category_id = $cost_category_id;
+        $this->cost_category->setId($cost_category_id);
         return $this;
     }
     
@@ -148,7 +142,7 @@ class Application_Model_AccountEntry
      * Returns the cost_category_name
      */
     public function getCostCategoryName(){
-        return $this->cost_category_name;
+        return $this->cost_category->getName();
     }
     
     /**
@@ -157,7 +151,7 @@ class Application_Model_AccountEntry
      * @return Application_Model_AccountEntry	the changed object
      */
     public function setCostCategoryName($cost_category_name){
-        $this->cost_category_name = $cost_category_name;
+        $this->cost_category->setName($cost_category_name);
         return $this;
     }
     
@@ -165,7 +159,7 @@ class Application_Model_AccountEntry
      * Returns the user_id.
      */
     public function getUserId(){
-        return $this->user_id;
+        return $this->user->getId();
     }
     
     /**
@@ -174,7 +168,7 @@ class Application_Model_AccountEntry
      * @return Application_Model_AccountEntry	the changed object
      */
     public function setUserId($user_id){
-        $this->user_id = $user_id;
+        $this->user->setId($user_id);
         return $this;
     }
 	
@@ -182,7 +176,7 @@ class Application_Model_AccountEntry
      * Returns the user_email.
      */
 	 public function getUserEmail(){
-        return $this->user_email;
+        return $this->user->getEmail();
     }
     
     /**
@@ -191,7 +185,7 @@ class Application_Model_AccountEntry
      * @return Application_Model_AccountEntry	the changed object
      */
     public function setUserEmail($user_email){
-        $this->user_email = $user_email;
+        $this->user->setEmail($user_email);
         return $this;
     }
     
@@ -216,7 +210,7 @@ class Application_Model_AccountEntry
      * Returns the price.
      */
     public function getPrice(){
-        return str_replace('.', ',', $this->price);
+        return $this->price;
     }
     
     /**
@@ -225,7 +219,7 @@ class Application_Model_AccountEntry
      * @return Application_Model_AccountEntry	the changed object
      */
     public function setPrice($price){
-        $this->price = str_replace(',', '.', $price);
+        $this->price = $price;
         return $this;
     }
     
@@ -246,4 +240,37 @@ class Application_Model_AccountEntry
         return $this;
     }
     
+    /**
+     * Returns the cost category.
+     */
+    public function getCostCategory(){
+    	return $this->cost_category;
+    }
+    
+    /**
+     * Sets the cost category with parameter.
+     * @param $costcat	a cost category model object
+     * @return Application_Model_AccountEntry	the changed object
+     */
+    public function setCostCategory($costcat){
+    	$this->cost_category = $costcat;
+    	return $this;
+    }
+    
+    /**
+     * Returns the user.
+     */
+    public function getUser(){
+    	return $this->user;
+    }
+    
+    /**
+     * Sets the user with parameter.
+     * @param $user	the user model object	
+     * @return Application_Model_AccountEntry	the changed object
+     */
+    public function setUser($user){
+    	$this->user = $user;
+    	return $this;
+    }
 }

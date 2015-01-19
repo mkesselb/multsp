@@ -55,10 +55,10 @@ class AccountDetailController extends Zend_Controller_Action
                 foreach ($results as $result){
                     $cat = new Application_Model_CostCategory();
                     $mapperC->find($result->getCostCategoryId(), $cat);
-                    $result->setCostCategoryName($cat->getName());    
+                    $result->setCostCategory($cat);    
 					$user = new Application_Model_User();
                     $mapperU->find($result->getUserId(), $user);
-                    $result->setUserEmail($user->getEmail()); 
+                    $result->setUser($user); 
                 }
                 
                 $this->view->entries = $results; 
@@ -105,12 +105,18 @@ class AccountDetailController extends Zend_Controller_Action
                     if ($form->isValid($request->getPost())){
                         $entry = new Application_Model_AccountEntry(null);
                         $mapperE  = new Application_Model_AccountEntryMapper();
-                        $entry->setCostCategoryId($form->getValue('category'));
-                        //$entry->setPrice($form->getValue('price'));
+                        
+                        $cat = new Application_Model_CostCategory();
+                        $cat->setId($form->getValue('category'));
+                        
+                        $user = new Application_Model_User();
+                        $user->setId($namespace->id);
+                        
+                        $entry->setCostCategory($cat);
                         $entry->setPrice($form->getValue('price'));
                         $entry->setComment($form->getValue('comment'));
                         $entry->setDate($form->getValue('date'));
-                        $entry->setUserId($namespace->id);
+                        $entry->setUser($user);
                         $entry->setAccountId($account_id);
                         $mapperE->save($entry);
                         
@@ -164,11 +170,18 @@ class AccountDetailController extends Zend_Controller_Action
                 if ($this->getRequest()->isPost()){
                     if ($form->isValid($request->getPost())){
                         $entry = new Application_Model_AccountEntry(null);
-                        $entry->setCostCategoryId($form->getValue('category'))
+                        
+                        $cat = new Application_Model_CostCategory();
+                        $cat->setId($form->getValue('category'));
+                        
+                        $user = new Application_Model_User();
+                        $user->setId($namespace->id);
+                        
+                        $entry->setCostCategory($cat)
                         	->setPrice($form->getValue('price'))
                         	->setComment($form->getValue('comment'))
                         	->setDate($form->getValue('date'))
-                        	->setUserId($namespace->id)
+                        	->setUser($user)
                         	->setAccountId($account_id)
                         	->setId($entry_id);
 						$mapperE  = new Application_Model_AccountEntryMapper();
@@ -345,12 +358,13 @@ class AccountDetailController extends Zend_Controller_Action
                 foreach ($results as $result){
                     $cat = new Application_Model_CostCategory();
                     $mapperC->find($result->getCostCategoryId(), $cat);
-                    $result->setCostCategoryName($cat->getName());    
+                    $result->setCostCategory($cat);  
 					$user = new Application_Model_User();
                     $mapperU->find($result->getUserId(), $user);
                     $result->setUserEmail($user->getEmail()); 
-                    $pieChartCategories[$cat->getName()] += $result->getPrice();
-                    $pieChartUsers[$user->getEmail()] += $result->getPrice();
+                    $res = floatval(str_replace(',', '.', $result->getPrice()));
+                    $pieChartCategories[$cat->getName()] += $res;
+                    $pieChartUsers[$user->getEmail()] += $res;
                 }
                 
                 $this->view->pieChartCategories = $pieChartCategories;

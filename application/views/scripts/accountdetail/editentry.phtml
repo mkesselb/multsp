@@ -35,14 +35,15 @@
 			?>
 
 			<script>
-			$('#date').on('click', function(){
-				$('#date').pickadate({
-				  format: 'yyyy-mm-dd',
-				  formatSubmit: 'yyyy-mm-dd'
-				});
+			$('#date').pickadate({
+			  format: 'yyyy-mm-dd',
+			  formatSubmit: 'yyyy-mm-dd',
+			  editable: true
 			});
-			/*$('#date').focusout(function(){
-				$('#date').pickadate().close();
+			/*$('#date').on('focusout', function(){
+				var $input = $('#date').pickadate();
+				var picker = $input.pickadate('picker');
+				picker.close();
 			});*/
 			</script>
 

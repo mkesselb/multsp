@@ -1,7 +1,23 @@
 <?php
-
+/**
+ * Login form, handling the login workflow of users.
+ * Information the user has to enter:
+ * 	email
+ *  password
+ * 
+ * @author mkesselb, comoessl, polschan 
+ */
 class Application_Form_Login extends Zend_Form
 {
+	/**
+	 * Initializes the form fields. The Login form contains the following fields:
+	 * 	email text field
+	 *  password field
+	 *  submit button
+	 *  csfr token
+	 *   
+	 * @see Zend_Form::init()
+	 */
     public function init()
     {
                 
@@ -33,7 +49,7 @@ class Application_Form_Login extends Zend_Form
             )
         ));
 
-        // Add the comment element
+        // Add the password element
         $this->addElement('password', 'password', array(
             'label'      => 'Password: ',
             'required'   => true,

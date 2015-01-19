@@ -1,7 +1,27 @@
 <?php
-
+/**
+ * EditEntry form, handling the edit workflow of existing entries.
+ * Information the user has to enter:
+ * 	category
+ *	date
+ *	price
+ *	comment
+ * 
+ * @author mkesselb, comoessl, polschan 
+ */
 class Application_Form_EditEntry extends Zend_Form
 {
+	/**
+	 * Initializes the form fields. The EditEntry form contains the following fields:
+	 * 	category multioption
+	 *	date picker (powered by javascript in view)
+	 *	price text
+	 *	comment text
+	 *	submit button
+	 *  csfr token
+	 *   
+	 * @see Zend_Form::init()
+	 */
     public function init()
     {
         // Set the method for the display form to POST
@@ -29,24 +49,28 @@ class Application_Form_EditEntry extends Zend_Form
             $options = array('' => '');
         }
         
+		//Add a multioption element for the category of the entry
         $this->addElement('select','category',array(
             'ignore' => true,
             'label' => 'category',
             'multioptions' => $options         
             ));
         
+		//Add the date element
         $this->addElement('text','date',array(
             'ignore' => true,
             'label' => 'date',
             'validators' => array('Date')
         ));
-        
+       
+		//Add a text element for price
         $this->addElement('text','price',array(
             'ignore' => true,
             'label' => 'price',
             'validators' => array('Float'),
         ));
         
+		//Add a text element for comment
         $this->addElement('text','comment',array(
             'ignore' => true,
             'label' => 'comment'

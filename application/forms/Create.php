@@ -1,7 +1,21 @@
 <?php
-
+/**
+ * Create form, handling the creation workflow of new accounts.
+ * Information the user has to enter:
+ * 	name
+ * 
+ * @author mkesselb, comoessl, polschan 
+ */
 class Application_Form_Create extends Zend_Form
 {
+	/**
+	 * Initializes the form fields. The Create form contains the following fields:
+	 * 	name text field
+	 *  submit button
+	 *  csfr token
+	 *   
+	 * @see Zend_Form::init()
+	 */
     public function init()
     {
         // Set the method for the display form to POST
@@ -22,7 +36,7 @@ class Application_Form_Create extends Zend_Form
             array(array('row' => 'HtmlTag'), array('tag' => 'tr'))
         ));
 
-        // Add an email element
+        // Add a text element for account name
         $this->addElement('text', 'name', array(
             'label'      => 'Name:',
             'required'   => true,

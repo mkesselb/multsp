@@ -1,7 +1,21 @@
 <?php
-
+/**
+ * InviteUser form, handling the invitation workflow of users to accounts.
+ * Information the user has to enter:
+ * 	email
+ * 
+ * @author mkesselb, comoessl, polschan 
+ */
 class Application_Form_InviteUser extends Zend_Form
 {
+	/**
+	 * Initializes the form fields. The InviteUser form contains the following fields:
+	 * 	email text field
+	 *  submit button
+	 *  csfr token
+	 *   
+	 * @see Zend_Form::init()
+	 */
     public function init()
     {
         // Set the method for the display form to POST
@@ -22,7 +36,7 @@ class Application_Form_InviteUser extends Zend_Form
             array(array('row' => 'HtmlTag'), array('tag' => 'tr'))
         ));
 
-        // Add an email element
+        // Add the email element
         $this->addElement('text', 'email', array(
             'label'      => 'User email:',
             'required'   => true,

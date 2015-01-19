@@ -1,12 +1,31 @@
 <?php
 
+/**
+ * Account controller includes all actions that are concerned with the management of one's accounts.
+ * The following actions are supported:
+ * 	index action
+ * 	create action
+ * 	confirminvite action
+ * 	deleteaccount action
+ * 
+ * @author mkesselb, comoessl, polschan
+ */
 class AccountController extends Zend_Controller_Action
 {
+	/**
+	 * Empty init function, creatd by template.
+	 * @see Zend_Controller_Action::init()
+	 */
     public function init()
     {
         /* Initialize action controller here */
     }
 
+    /**
+     * Index action takes the user_id from the session to query the database for all
+     * accounts the user is in relationship with.
+     * Those accounts are given to the view in order to show all accounts.
+     */
     public function indexAction()
     {
         $namespace = new Zend_Session_Namespace('myUltimateSession');
@@ -37,6 +56,11 @@ class AccountController extends Zend_Controller_Action
         }
     }
     
+    /**
+     * Create action shows the CreteAccount form on get.
+     * On post, the account with the entered name is written into the database,
+     * and the current user is entered in the user_in_account relationship.
+     */
     public function createAction(){
         $request = $this->getRequest();
         $namespace = new Zend_Session_Namespace('myUltimateSession');
@@ -82,6 +106,12 @@ class AccountController extends Zend_Controller_Action
         }
     }
     
+    /**
+     * ConfirmInvite actions takes the account_id of the account to be invited from get-parameter
+     * and the user_id from session in order to write the confirmed-flag in the user_in_account
+     * relationship on database.
+     * Then, it is redirected to the index action of this controller.
+     */
     public function confirminviteAction(){
         $namespace = new Zend_Session_Namespace('myUltimateSession');
         if(isset($namespace->id)) {
@@ -101,6 +131,11 @@ class AccountController extends Zend_Controller_Action
         return $this->_helper->redirector('index', 'account');
     }
     
+    /**
+     * DeleteAccount action takes the account_id that shall be deleted as get-parameter,
+     * and deletes the current user_id (from session) from the user_in_account relationship.
+     * Then, it is redirected to the index action of this controller.
+     */
     public function deleteaccountAction(){
         $namespace = new Zend_Session_Namespace('myUltimateSession');
         if(isset($namespace->id)) {

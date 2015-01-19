@@ -1,7 +1,25 @@
 <?php
-
+/**
+ * Register form, handling the register workflow of new users.
+ * Information the user has to enter:
+ * 	email
+ *  password
+ *  confirm password
+ * 
+ * @author mkesselb, comoessl, polschan 
+ */
 class Application_Form_Register extends Zend_Form
 {
+	/**
+	 * Initializes the form fields. The Register form contains the following fields:
+	 * 	email text field
+	 *  password field
+	 *  confirm password field
+	 *  submit button
+	 *  csfr token
+	 *   
+	 * @see Zend_Form::init()
+	 */
     public function init()
     {
         // Set the method for the display form to POST

@@ -1,11 +1,29 @@
 <?php
+/**
+ * Model class for account objects.
+ * Account objects represent the cost accounts.
+ * User can save categories and entries to them by using the account id and the respective mapper model.
+ * 
+ * @author mkesselb, comoessl, polschan
+ */
 class Application_Model_Account
 {
+	/** Database id of the account. */
     protected $id;
+    
+    /** Name of the account. */
     protected $name;
+    
+    /** String account code. Currently not used. */
     protected $code;
+    
+    /** Confirmed flag of the account. Currently not used. */
     protected $confirmed;
 
+    /**
+     * Constructor, setting all values from the parameter array that represent valid values.
+     * @param array $options 	array of name-value pairs that shall be set for the new instance
+     */
     public function __construct(array $options = null)
     {
         if (is_array($options)) {
@@ -13,6 +31,12 @@ class Application_Model_Account
         }
     }
 
+    /**
+     * 'Magic' setter method, providing a way to access the various set methods of this class.
+     * @param $name		name of the setter method to be invoked
+     * @param $value	value to be set
+     * @throws Exception
+     */
     public function __set($name, $value)
     {
         $method = 'set' . $name;
@@ -22,6 +46,11 @@ class Application_Model_Account
         $this->$method($value);
     }
 
+    /**
+     * 'Magic' getter method, providing a way to access the various get methods of this class.
+     * @param $name		name of the getter method to be invoked
+     * @throws Exception
+     */
     public function __get($name)
     {
         $method = 'get' . $name;
@@ -31,6 +60,13 @@ class Application_Model_Account
         return $this->$method();
     }
 
+    /**
+     * Calls the setter specified in the parameter array with the corresponding values.
+     * Returns the resulting object. 
+     * @param array $options	name-value, giving the name of the setter to be called with the corr. value
+     * @return Application_Model_Account	result from constructing a new instance and 
+     * 											invoking all specified setter
+     */
     public function setOptions(array $options)
     {
         $methods = get_class_methods($this);
@@ -43,37 +79,69 @@ class Application_Model_Account
         return $this;
     }
 
+    /**
+     * Returns the name.
+     */
     public function getName(){
         return $this->name;
     }
 
+    /**
+     * Sets the name with parameter.
+     * @param string $name	the name to be set
+     * @return Application_Model_Account	the changed object.
+     */
     public function setName($name){
         $this->name = $name;
         return $this;
     }
 
+    /**
+     * Returns the account code string.
+     */
     public function getCode(){
         return $this->code;
     }
 
+    /**
+     * Sets the account_code with parameter.
+     * @param string $code	the code to be set
+     * @return Application_Model_Account	the changed object
+     */
     public function setCode($code){
         $this->code = $code;
         return $this;
     }
 
+    /**
+     * Returns the account_id.
+     */
     public function getId(){
         return $this->id;
     }
 
+    /**
+     * Sets the account_id with parameter.
+     * @param int $id	the id to be set
+     * @return Application_Model_Account	the changed object
+     */
     public function setId($id){
         $this->id = $id;
         return $this;
     }
     
+    /**
+     * Returns the confirmation flag.
+     */
     public function getConfirmed(){
         return $this->confirmed;
     }
     
+    /**
+     * Sets the confirmation flag with parameter.
+     * @param int $confirmed	the confirmation flag to be set
+     * @return Application_Model_Account	the changed object
+     */
     public function setConfirmed($confirmed){
         $this->confirmed = $confirmed;
         return $this;

@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Sample Bootstrap class, created by Zend Studio template.
+ */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initDoctype()
@@ -9,4 +12,3 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->doctype('XHTML1_STRICT');
     }
 }
-

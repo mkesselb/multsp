@@ -1,12 +1,28 @@
 <?php
 
+/**
+ * Register controller class, handling the actions associated with registering of a new user.
+ * 
+ * @author mkesselb, comoessl, polschan
+ */
 class RegisterController extends Zend_Controller_Action
 {
+	/**
+	 * Empty init function, creatd by template.
+	 * @see Zend_Controller_Action::init()
+	 */
     public function init()
     {
         /* Initialize action controller here */
     }
 
+    /**
+     * Index action, showing the register form of a new user on get.
+     * On post, the new user is written into the database if the email is not yet registered,
+     * together with a confirmation code.
+     * This confirmation code and a link to the confirm action of this controller
+     * is sent to the entered email of the user.
+     */
     public function indexAction()
     {
         $request = $this->getRequest();
@@ -53,6 +69,10 @@ class RegisterController extends Zend_Controller_Action
         $this->view->form = $form;
     }
     
+    /**
+     * Confirm action reads the confirmation code as get-parameter and tries to confirm the corresponding
+     * user so that he/she can login.
+     */
     public function confirmAction(){
         $request = $this->getRequest();
         $success = 'confirmation not successful';

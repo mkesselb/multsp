@@ -1,8 +1,9 @@
 <?php
-
+/**
+ * Standard error controller, created by the Zend Studio template.
+ */
 class ErrorController extends Zend_Controller_Action
 {
-
     public function errorAction()
     {
         $errors = $this->_getParam('error_handler');
@@ -45,7 +46,4 @@ class ErrorController extends Zend_Controller_Action
         $log = $bootstrap->getResource('Log');
         return $log;
     }
-
-
 }
-

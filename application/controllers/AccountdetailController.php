@@ -1,11 +1,33 @@
 <?php
+
+/**
+ * AccountDetail controller, handling all actions that concern a single account.
+ * The following actions are supported:
+ * 	index action
+ * 	createentry action
+ * 	editentry action
+ * 	createcategory action
+ * 	inviteuser action
+ *	charts action
+ *	credentials action
+ * @author mkesselb, comoessl, polschan
+ */
 class AccountDetailController extends Zend_Controller_Action
 {
+	/**
+	 * Empty init function, creatd by template.
+	 * @see Zend_Controller_Action::init()
+	 */
     public function init()
     {
        
     }
 
+    /**
+     * Index action shows the basic overview of the current account.
+     * User_id is fetched from session, account_id is a get-parameter.
+     * All account entries are fetched from this the database and given to the view.
+     */
     public function indexAction()
     {
         $namespace = new Zend_Session_Namespace('myUltimateSession');
@@ -49,6 +71,11 @@ class AccountDetailController extends Zend_Controller_Action
         }
     }
     
+    /**
+     * CreateEntry action shows the create entry form on get.
+     * On post, the values are taken from the form and a new entry object is written into the database.
+     * Account_id and user_id is taken from the session.
+     */
     public function createentryAction(){
         $request = $this->getRequest();
         $namespace = new Zend_Session_Namespace('myUltimateSession');
@@ -103,6 +130,11 @@ class AccountDetailController extends Zend_Controller_Action
        }
     }
     
+    /**
+     * EditEntry action renders the edit entry from, which is similar to the create entry form,
+     * but fills the form elements with the entry data that is fetched from database.
+     * The fetch works with the entry id which is a get-parameter. Account_id is taken from the session.
+     */
     public function editentryAction(){
     	$request = $this->getRequest();
         $namespace = new Zend_Session_Namespace('myUltimateSession');
@@ -166,6 +198,11 @@ class AccountDetailController extends Zend_Controller_Action
        }
     }
     
+    /**
+     * CreateCategory action shows the create category form on get.
+     * On post, the name of the new category is taken from the form and written in the database,
+     * with the account_id from session.
+     */
     public function createcategoryAction(){
         $request = $this->getRequest();
         $namespace = new Zend_Session_Namespace('myUltimateSession');
@@ -202,6 +239,11 @@ class AccountDetailController extends Zend_Controller_Action
         }
     }
     
+    /**
+     * InviteUser action shows the invite form on get.
+     * On post, it tries to write the email from the invite form in the user_in_account relationship,
+     * with the confirm flag of 0.
+     */
     public function inviteuserAction(){
         $request = $this->getRequest();
         $namespace = new Zend_Session_Namespace('myUltimateSession');
@@ -254,9 +296,11 @@ class AccountDetailController extends Zend_Controller_Action
         }
     }
     
+    /**
+     * Charts action fetches all entries of the account (account_id is get-parameter, user_id is in session),
+     * aggregates them and gives them to the view. There, charts are drawn via javascript.
+     */
     public function chartsAction(){
-    	//TODO: what things does the user want there?
-    	
 		$namespace = new Zend_Session_Namespace('myUltimateSession');
         if(isset($namespace->id)) {
             $account_id = $_GET['id'];
@@ -320,7 +364,11 @@ class AccountDetailController extends Zend_Controller_Action
         }
     }
     
+    /**
+     * Credentials action has an empty body and shows only the corresponding view.
+     * This action is called when another action is called with insufficient credentials
+     * (e.g. trying to access an account by manipulating the URL).
+     */
     public function credentialsAction(){
-        //
     }
 }

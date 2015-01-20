@@ -78,7 +78,7 @@ class IndexController extends Zend_Controller_Action
         unset($namespace->id);
     }
     
-    /** Decrypt functions from: http://www.phpgangsta.de/schoener-hashen-mit-bcrypt. */
+    /** Decrypt function from: http://www.phpgangsta.de/schoener-hashen-mit-bcrypt. */
     private function bcrypt_check ( $email, $password, $stored )
     {
     	$string = hash_hmac ( "whirlpool", str_pad ( $password, strlen ( $password ) * 4, sha1 ( $email ), STR_PAD_BOTH ), SALT, true );

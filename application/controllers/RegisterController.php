@@ -103,8 +103,9 @@ class RegisterController extends Zend_Controller_Action
     }
     
     /** 
-     * Note to the encryption: we wanted to use the new php 5.5 methods password_hash
-     * and password_verify, but the server was only on php version 5.3. So this is the alternative.
+     * Note to the encryption: we wanted to use the new php 5.5 methods
+     * password_hash and password_verify,
+     * but the server was only on php version 5.3. So this is the alternative.
      * 
      * Encrypt function from: http://www.phpgangsta.de/schoener-hashen-mit-bcrypt.
      */

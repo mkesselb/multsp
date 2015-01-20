@@ -9,13 +9,15 @@
 
 			<?php
 			$this->form->setAction($this->url());
-			echo $this->form;
+			echo $this->form;?>
 
+			<normaltext>
+			<?php
 			if($this->duplicate !== null){
 				echo $this->duplicate . '<br>';
-			}
-
-			?>
+			}?>
+			</normaltext>
+			
 			<largetext><a href="<?php echo $this->url(
 			array(
 			'controller' => 'index',

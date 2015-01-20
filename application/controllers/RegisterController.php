@@ -43,22 +43,31 @@ class RegisterController extends Zend_Controller_Action
                     $user->setPassword($pw);
                     $mapper->save($user);
                     
-                    //TODO: mail configuration
+                    //mail configuration
+                    $config = array('ssl' => 'tls',
+                    		'port' => 587,
+                    		'auth' => 'login',
+                    		'username' => 'mkesselb@gmail.com',
+                    		'password' => 'webtecpass',
+                    );
+                    $tr = new Zend_Mail_Transport_Smtp('smtp.gmail.com', $config);
+                    Zend_Mail::setDefaultTransport($tr);
+                    
                     $mail = new Zend_Mail();
                     $mail->setBodyText('registration url: '
                         . $_SERVER["HTTP_HOST"]
                         . $_SERVER["REQUEST_URI"]
                         . '/confirm?confirmation_code=' . $user->getConfirmation_code())
-                        ->setFrom('noreply@multsp.at', 'noreply')
+                        ->setFrom('mkesselb@gmail.com', 'my-ultimate-spendings')
                         ->addTo($user->getEmail(), $user->getEmail())
                         ->setSubject('Registration to my-ultimate-spendings')
                         ->send();
                     
                     //for test only: return confirmation link to user on view
-                    $duplicate = 'registration url: '
+                    /*$duplicate = 'registration url: '
                         . $_SERVER["HTTP_HOST"]
                         . $_SERVER["REQUEST_URI"]
-                        . '/confirm?confirmation_code=' . $user->getConfirmation_code();
+                        . '/confirm?confirmation_code=' . $user->getConfirmation_code();*/
                     //redirect to index/index
                     //return $this->_helper->redirector('index', 'index');
                 }

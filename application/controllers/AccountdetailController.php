@@ -260,7 +260,11 @@ class AccountDetailController extends Zend_Controller_Action
                 	$mapperE = new Application_Model_AccountEntryMapper();
                 	try{
                 		$ent = $mapperE->findByField('id', $entry_id);
-                		$entry = $ent[0];
+                		if(count($ent) > 0){
+                			$entry = $ent[0];
+                		} else{
+                			throw new Exception();
+                		}
                 	} catch (Exception $e) {
                 		return $this->_helper->redirector('error', 'error');
                 	}

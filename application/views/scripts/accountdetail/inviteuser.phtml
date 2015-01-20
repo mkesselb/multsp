@@ -22,12 +22,15 @@
 
 				<?php
 				$this->form->setAction($this->url());
-				echo $this->form;
+				echo $this->form;?>
 
+				<normaltext>
+				<?php
 				if($this->status !== null){
 					echo $this->status . '<br>';
 				}
 				?>
+				</normaltext>
 
 				<dl>
 				<p><a href="<?php echo $this->url(

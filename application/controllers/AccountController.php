@@ -34,20 +34,32 @@ class AccountController extends Zend_Controller_Action
             
             $userInAccount = new Application_Model_UserInAccount(null);
             $mapper  = new Application_Model_UserInAccountMapper();
-            $results = $mapper->findByField('user_id', $user_id);
+            try{
+            	$results = $mapper->findByField('user_id', $user_id);
+            } catch (Exception $e) {
+            	return $this->_helper->redirector('error', 'error');
+			}
             
             $accounts = array();
             foreach($results as $row){
                 $account = new Application_Model_Account();
                 $mapper  = new Application_Model_AccountMapper();
-                $mapper->findByField('id',$row->getAccountId(), $account);
+                try{
+                	$mapper->findByField('id',$row->getAccountId(), $account);
+                } catch (Exception $e) {
+                	return $this->_helper->redirector('error', 'error');
+                }
                 $account->setConfirmed($row->getConfirmed());
                 $accounts[] = $account;
             }
             
             $user = new Application_Model_User();
             $umapper = new Application_Model_UserMapper();
-            $umapper->find($user_id, $user);
+            try{
+            	$umapper->find($user_id, $user);
+            } catch (Exception $e) {
+				return $this->_helper->redirector('error', 'error');
+            }
             
             $this->view->results = $accounts;
             $this->view->user = $user;
@@ -68,7 +80,11 @@ class AccountController extends Zend_Controller_Action
 			$form    = new Application_Form_Create();
 			$user = new Application_Model_User();
 					$umapper = new Application_Model_UserMapper();
-					$umapper->find($namespace->id, $user);
+					try{
+						$umapper->find($namespace->id, $user);
+					} catch (Exception $e) {
+	                	return $this->_helper->redirector('error', 'error');
+	                }
 					$this->view->user = $user;
             
             if ($this->getRequest()->isPost()){
@@ -78,23 +94,39 @@ class AccountController extends Zend_Controller_Action
                     $account->setName($form->getValue('name'));
                     $code = substr(base64_encode(sha1(mt_rand())), 0, 20);
                     $account->setCode($code);
-                    $mapperA->save($account);
+                    try{
+                    	$mapperA->save($account);
+                    } catch (Exception $e) {
+	                	return $this->_helper->redirector('error', 'error');
+	                }
             
                     $userInAccount = new Application_Model_UserInAccount();
                     $mapperC = new Application_Model_UserInAccountMapper();
-                    $mapperA->findByField('code', $code, $account);
+                    try{
+                    	$mapperA->findByField('code', $code, $account);
+                    } catch (Exception $e) {
+	                	return $this->_helper->redirector('error', 'error');
+	                }
                     $userInAccount->setAccountId($account->getId())
                     ->setUserId($namespace->id)
                     ->setConfirmed(1);
-                    $mapperC->save($userInAccount);
-					
+                    
+                    try{
+                    	$mapperC->save($userInAccount);
+                    } catch (Exception $e) {
+	                	return $this->_helper->redirector('error', 'error');
+	                }
                     
                     //also create default category
                     $cat = new Application_Model_Costcategory(null);
                     $cat->setAccountId($account->getId())
                     	->setName('default');
                     $catMapper = new Application_Model_CostcategoryMapper();
-                    $catMapper->save($cat);
+                    try{
+                    	$catMapper->save($cat);
+                    } catch (Exception $e) {
+	                	return $this->_helper->redirector('error', 'error');
+	                }
             
                     return $this->_helper->redirector('index', 'account');
                 }
@@ -120,9 +152,17 @@ class AccountController extends Zend_Controller_Action
             
             $mapper = new Application_Model_UserInAccountMapper();
             $userInAccount = new Application_Model_UserInAccount();
-            $mapper->find($user_id, $account_id, $userInAccount);
+            try{
+            	$mapper->find($user_id, $account_id, $userInAccount);
+            } catch (Exception $e) {
+            	return $this->_helper->redirector('error', 'error');
+			}
             if($userInAccount->getUserId() === $user_id){
-                $mapper->update($userInAccount->setConfirmed(1));   
+            	try{
+            		$mapper->update($userInAccount->setConfirmed(1));
+            	} catch (Exception $e) {
+            		return $this->_helper->redirector('error', 'error');
+            	}   
             }
         } else {
             return $this->_helper->redirector('expire', 'index');    
@@ -144,7 +184,11 @@ class AccountController extends Zend_Controller_Action
             
             $mapper = new Application_Model_UserInAccountMapper();
             $userInAccount = new Application_Model_UserInAccount();
-            $mapper->delete($user_id, $account_id);
+            try{
+            	$mapper->delete($user_id, $account_id);
+            } catch (Exception $e) {
+            	return $this->_helper->redirector('error', 'error');
+            }
         } else {
             return $this->_helper->redirector('expire', 'index');    
         }

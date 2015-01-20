@@ -1,7 +1,7 @@
 <?php
 /**
  * Model mapper class which offers methods to save and fetch user objects
- * from the corresponding database table .
+ * from the corresponding database table.
  * 
  * @author mkesselb, comoessl, polschan
  */

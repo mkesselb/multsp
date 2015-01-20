@@ -38,7 +38,11 @@ class IndexController extends Zend_Controller_Action
             if ($form->isValid($request->getPost())){
                 $user = new Application_Model_User(null);
                 $mapper  = new Application_Model_UserMapper();
-                $mapper->findByField('email', $form->getValue('email'), $user);
+                try {
+                	$mapper->findByField('email', $form->getValue('email'), $user);
+                } catch (Exception $e) {
+                	return $this->_helper->redirector('error', 'error');
+                }
                 if($this->bcrypt_check($user->getEmail(), $form->getValue('password'), $user->getPassword())){
                 //if(password_verify($form->getValue('password'), $user->getPassword())){
                     if($user->getConfirmation_code() === '1'){

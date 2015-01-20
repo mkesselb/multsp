@@ -3,12 +3,10 @@
 	<head>
 	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	  <title>multsp</title>
-	  <?php echo $this->headLink()->appendStylesheet('/multsp/application/layouts/layout.css') ?>
+	  <?php echo $this->headLink()->appendStylesheet($this->baseUrl('/../application/layouts/layout.css')) ?>
 	</head>
 
 	<body>
 		<?php echo $this->layout()->content ?>
 	</body>
 </html>
-
-

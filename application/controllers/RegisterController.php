@@ -39,7 +39,8 @@ class RegisterController extends Zend_Controller_Action
                 } else{
                     $user = new Application_Model_User($form->getValues());
                     $user->setConfirmation_code(substr(base64_encode(sha1(mt_rand())), 0, 20));
-                    $pw = password_hash($user->getPassword(), PASSWORD_DEFAULT);
+                    //$pw = password_hash($user->getPassword(), PASSWORD_DEFAULT);
+                    $pw = $this->bcrypt_encode($form->getValue('email'), $user->getPassword());
                     $user->setPassword($pw);
                     $mapper->save($user);
                     
@@ -64,6 +65,7 @@ class RegisterController extends Zend_Controller_Action
                         ->send();
                     
                     //for test only: return confirmation link to user on view
+                    $duplicate = 'registration complete. please check your emails!';
                     /*$duplicate = 'registration url: '
                         . $_SERVER["HTTP_HOST"]
                         . $_SERVER["REQUEST_URI"]
@@ -98,5 +100,18 @@ class RegisterController extends Zend_Controller_Action
         }
         
         $this->view->success = $success;
+    }
+    
+    /** 
+     * Note to the encryption: we wanted to use the new php 5.5 methods password_hash
+     * and password_verify, but the server was only on php version 5.3. So this is the alternative.
+     * 
+     * Encrypt function from: http://www.phpgangsta.de/schoener-hashen-mit-bcrypt.
+     */
+    private function bcrypt_encode ( $email, $password, $rounds='08' )
+    {
+    	$string = hash_hmac ( "whirlpool", str_pad ( $password, strlen ( $password ) * 4, sha1 ( $email ), STR_PAD_BOTH ), SALT, true );
+    	$salt = substr ( str_shuffle ( './0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' ) , 0, 22 );
+    	return crypt ( $string, '$2a$' . $rounds . '$' . $salt );
     }
 }

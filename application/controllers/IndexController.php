@@ -39,7 +39,8 @@ class IndexController extends Zend_Controller_Action
                 $user = new Application_Model_User(null);
                 $mapper  = new Application_Model_UserMapper();
                 $mapper->findByField('email', $form->getValue('email'), $user);
-                if(password_verify($form->getValue('password'), $user->getPassword())){
+                if($this->bcrypt_check($user->getEmail(), $form->getValue('password'), $user->getPassword())){
+                //if(password_verify($form->getValue('password'), $user->getPassword())){
                     if($user->getConfirmation_code() === '1'){
                         $namespace->id = $user->getId();
                         return $this->_helper->redirector('index', 'account');
@@ -75,5 +76,12 @@ class IndexController extends Zend_Controller_Action
     public function expireAction(){
         $namespace = new Zend_Session_Namespace('myUltimateSession');
         unset($namespace->id);
+    }
+    
+    /** Decrypt functions from: http://www.phpgangsta.de/schoener-hashen-mit-bcrypt. */
+    private function bcrypt_check ( $email, $password, $stored )
+    {
+    	$string = hash_hmac ( "whirlpool", str_pad ( $password, strlen ( $password ) * 4, sha1 ( $email ), STR_PAD_BOTH ), SALT, true );
+    	return crypt ( $string, substr ( $stored, 0, 30 ) ) == $stored;
     }
 }

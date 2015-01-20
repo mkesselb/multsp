@@ -11,11 +11,14 @@
 
 			<?php
 			$this->form->setAction($this->url());
-			echo $this->form;
+			echo $this->form; ?>
+			
+			<normaltext>
+			<?php
 			if($this->confirm !== null){
 				echo $this->confirm . '<br>';
-			}
-			?>
+			}?>
+			</normaltext>
 
 			<div id="register">
 				<largetext><a href="<?php echo $this->url(

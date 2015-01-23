@@ -5,14 +5,8 @@ An diesem Projekt haben gearbeitet:
 	Mößlacher Corinna; 	0960174
 	Olschan Patrick; 	0960730
 	
-Arbeitsaufteilung:
-alle	Konzept- und Datenbankerstellung
-max		hauptsächlich controller
-corinna	hauptsächlich model
-patrick	hauptsächlich view
-
+Arbeitsaufteilung ist im beigefügten Excel-Sheet zu sehen. 
 Bei Fehlern / Problemen hat aber jeder je nach Zeit an der geeigneten Stelle angepackt.
-Dies bedeutet insbesondere, dass jedes Teammitglied an jedem Teil mal etwas verändert hat.
 
 Zur Sourcecode-Verwaltung / -Versionierung liegt das Projekt auf github:
 https://github.com/mkesselb/multsp

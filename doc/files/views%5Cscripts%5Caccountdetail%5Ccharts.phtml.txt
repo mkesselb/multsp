@@ -1,0 +1,54 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<?php echo $this->headScript()->appendFile($this->baseUrl('/Chart.js'));?>
+<?php echo $this->headScript()->appendFile($this->baseUrl('/../application/views/scripts/accountdetail/charts.js'));?>
+			
+<img id="bgImg" src="<?php echo $this->baseUrl();?>/graphics/background_dark.jpg" >
+<div id="bodyDiv">
+	<div id="logosmallDiv"><img id="logosmallImg" src="<?php echo $this->baseUrl();?>/graphics/logo_small.jpg" "></div>
+	<div id="contentsmallDiv">
+		<div id="content">
+			<div id="name">
+				<normaltext><br><?php echo $this->user->getEmail()?> </normaltext>
+			</div>
+			<div>
+			<p><a href = "<?php echo $this->url(
+					array(
+					'controller' => 'index',
+					'action'     => 'logout'
+					),
+					'default',
+					true) ?>">Logout</a>
+			</p>
+			</div>
+			<div id="welcome">
+				<headline><?php echo $this->account->getName() ?> - Charts</headline><br><br>
+			</div>
+
+			<div style="width: 50%">
+				<p><normaltext>Expenses per category</normaltext></p>
+				<canvas id="canvas" height="250" width="250"></canvas>
+				<p><normaltext>Expenses per user</normaltext></p>
+				<canvas id="canvas2" height="250" width="250"></canvas>
+			</div> 
+
+			<dl>
+			   <p><a href="<?php echo $this->url(
+					array(
+					'controller' => 'accountdetail',
+					'action'     => 'index'
+					),
+					'default',
+					true) . '?id=' . $this->accId ?>">back</a></p>
+			</dl>
+
+
+			<script>
+				$(document).ready(function(){
+					drawPie("canvas", <?php echo json_encode($this->pieChartCategories) ?>);
+					drawPie("canvas2", <?php echo json_encode($this->pieChartUsers) ?>);
+				});
+			</script>
+		</div>
+	</div>
+</div>
+

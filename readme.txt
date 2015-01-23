@@ -8,6 +8,9 @@ An diesem Projekt haben gearbeitet:
 Arbeitsaufteilung ist im beigefügten Excel-Sheet zu sehen. 
 Bei Fehlern / Problemen hat aber jeder je nach Zeit an der geeigneten Stelle angepackt.
 
+Im Ordner scripts ist ein Datenbank-Dump zu finden.
+Im Ordner doc ist die von phpDocumentator erzeugte Dokumentation des application-Ordners abgelegt.
+
 Zur Sourcecode-Verwaltung / -Versionierung liegt das Projekt auf github:
 https://github.com/mkesselb/multsp
 

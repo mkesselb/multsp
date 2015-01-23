@@ -1,0 +1,20 @@
+<img id="bgImg" src="<?php echo $this->baseUrl();?>/graphics/background.jpg" >
+<div id="bodyDiv">
+	<div id="logoDiv"><img id="logoImg" src="<?php echo $this->baseUrl();?>/graphics/logo_large.jpg" "></div>
+	<div id="contentDiv">
+		<div id="content">
+			<div id="welcome">
+				<headline><br>Sorry, there is a technical problem!</headline>
+				
+				<largetext><p><a href="<?php echo $this->url(
+					array(
+					'controller' => 'index',
+					'action'     => 'index'
+					),
+					'default',
+					true) ?>">Back</a></p>
+				</largetext>
+			</div>
+		</div>
+	</div>
+</div>

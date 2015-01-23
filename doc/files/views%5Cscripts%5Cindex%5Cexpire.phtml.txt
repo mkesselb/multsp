@@ -1,0 +1,18 @@
+<img id="bgImg" src="<?php echo $this->baseUrl();?>/graphics/background_dark.jpg" >
+<div id="bodyDiv">
+	<div id="logosmallDiv"><img id="logosmallImg" src="<?php echo $this->baseUrl();?>/graphics/logo_small.jpg" "></div>
+	<div id="contentsmallDiv">
+		<div id="content">
+			<?php
+			echo 'Your session has expired. Please login again!' . '<br>';
+			?>
+			<p><a href="<?php echo $this->url(
+				array(
+					'controller' => 'index',
+					'action'     => 'index'
+				),
+				'default',
+				true) ?>">Click here to login!</a></p>
+		</div>
+	</div>
+</div>

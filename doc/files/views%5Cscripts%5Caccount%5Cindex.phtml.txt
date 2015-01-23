@@ -1,0 +1,70 @@
+<img id="bgImg" src="<?php echo $this->baseUrl();?>/graphics/background_dark.jpg" >
+<div id="bodyDiv">
+	<div id="logosmallDiv"><img id="logosmallImg" src="<?php echo $this->baseUrl();?>/graphics/logo_small.jpg" "></div>
+	<div id="contentsmallDiv">
+		<div id="content">
+			<div id="name">
+				<normaltext><br><?php echo $this->user->getEmail()?> </normaltext>
+			</div>
+			<div>
+			<p><a href = "<?php echo $this->url(
+					array(
+					'controller' => 'index',
+					'action'     => 'logout'
+					),
+					'default',
+					true) ?>">Logout</a>
+			</p>
+			</div>
+			<div id="welcome">
+				<headline>Welcome to your accounts!</headline><br><br>
+			</div>
+			<div>
+			<p><a href = "<?php echo $this->url(
+					array(
+					'controller' => 'account',
+					'action'     => 'create'
+					),
+					'default',
+					true) ?>">Create new account</a></p>
+			</div>
+			<normaltext>
+			<table class="acc">
+			<tr><th><largetext>Account name</largetext></th></tr>
+				<?php foreach ($this->results as $result): ?>
+			   <tr><td>
+			   <a href="<?php echo $this->url(
+					array(
+					'controller' => 'accountdetail',
+					'action'     => 'index'
+					),
+					'default',
+					true) . '?id=' . $result->getId() ?>"><?php echo $result->getName() ?></a>
+				</td><td>
+					<?php
+					if($result->getConfirmed()){
+						//echo 'confirmed';
+					} else{
+						echo '<a href="' . 
+							$this->url(array('controller' => 'account', 'action' => 'confirminvite'),
+								'default', true) . '?id=' . $result->getId() . '">' . 'confirm invite' . '</a>';
+					}
+					?>
+				</td><td>
+					<a href="<?php echo $this->url(
+					array(
+					'controller' => 'account',
+					'action'     => 'deleteaccount'
+					),
+					'default',
+					true) . '?id=' . $result->getId()?>" onClick="return confirm('Do you really want to delete this account?');">delete</a>
+				<td>
+				</td></tr>
+				<?php endforeach ?>
+			</table>
+			</normaltext>
+		</div>
+	</div>
+</div>
+			
+			

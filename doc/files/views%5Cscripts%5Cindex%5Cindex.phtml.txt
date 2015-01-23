@@ -1,0 +1,34 @@
+<img id="bgImg" src="<?php echo $this->baseUrl();?>/graphics/background.jpg" >
+<div id="bodyDiv">
+	<div id="logoDiv"><img id="logoImg" src="<?php echo $this->baseUrl();?>/graphics/logo_large.jpg" "></div>
+	<div id="contentDiv">
+		<div id="content">
+			<div id="welcome">
+				<headline><br>Welcome to myUltimateSpendings</headline>
+				<largetext><br><br>Register yourself and join our ultimate web-based accounting software.
+				<br>It's is easy to use, free and of course it's ultimate!<br><br></largetext>
+			</div>
+
+			<?php
+			$this->form->setAction($this->url());
+			echo $this->form; ?>
+			
+			<normaltext>
+			<?php
+			if($this->confirm !== null){
+				echo $this->confirm . '<br>';
+			}?>
+			</normaltext>
+
+			<div id="register">
+				<largetext><a href="<?php echo $this->url(
+				array(
+					'controller' => 'register',
+					'action'     => 'index'
+				),
+				'default',
+				true) ?>">Register here</a></largetext>
+			</div>
+		</div>
+	</div>
+</div>
